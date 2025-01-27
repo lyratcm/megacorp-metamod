@@ -1,0 +1,4 @@
+bounty_unity_bonus = {
+	country_unity_produces_mult = 1
+	country_unity_produces_mult_offset = 1
+}

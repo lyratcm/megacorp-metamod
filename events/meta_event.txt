@@ -257,7 +257,7 @@ country_event = {
 	hide_window = yes
 
 	trigger = {
-		years_passed = 1
+		years_passed > 1
 		has_origin = origin_spectrals_cluster
 	}
 

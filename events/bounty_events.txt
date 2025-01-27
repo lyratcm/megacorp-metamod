@@ -1,11 +1,12 @@
 namespace = bounty_event
+
 country_event = {
 	id = bounty_event.1
 	fire_only_once = yes
 	trigger = {
 		not = {
 			has_global_flag = ctf_set
-		}	
+		}
 	}
 	hide_window = yes
 	immediate = {
@@ -24,6 +25,7 @@ country_event = {
 		}
 	}
 }
+
 country_event = {
 	id = bounty_event.2
 	is_triggered_only = yes
@@ -70,10 +72,29 @@ country_event = {
 					}
 				}
 				solar_system.owner = {
-					add_monthly_resource_mult = {
-						resource = unity
-						value = 12
+					#remove previous owners modifier
+					if = {
+						limit = {
+							exists = event_target:ctf_bonus_country
+							not = {
+								event_target:ctf_bonus_country = {
+									is_same_empire = prev
+								}
+							}
+						}
+						event_target:ctf_bonus_country = {
+							remove_modifier = bounty_unity_bonus
+						}
 					}
+					save_global_event_target_as = ctf_bonus_country
+					add_modifier = {
+						modifier = bounty_unity_bonus
+						mult = value:bountry_unity_scale
+					}
+					# add_monthly_resource_mult = {
+					# 	resource = unity
+					# 	value = 12
+					# }
 				}
 			}
 			else_if = {
