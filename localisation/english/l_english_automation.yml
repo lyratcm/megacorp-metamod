@@ -1,0 +1,14 @@
+﻿l_english:
+ planet_automation_clerks:0 "Clerk automation"
+ planet_automation_culture_worker:0 "Culture worker automation"
+ planet_capital_research:0 "Capital specialization - research"
+ planet_capital_industrial:0 "Capital specialization - industrial"
+ planet_capital_alloys:0 "Capital specialization - alloys"
+ planet_capital_consumer_goods:0 "Capital specialization - consumer goods"
+
+ planet_automation_clerks_desc:0 "Disables all clerk jobs"
+ planet_automation_culture_worker_desc:0 "Disables all culture worker jobs"
+ planet_capital_research_desc:0 "Specialization for the capital focusing on research"
+ planet_capital_industrial_desc:0 "Specialization for the capital focusing on alloys and consumer goods"
+ planet_capital_alloys_desc:0 "Specialization for the capital focusing on alloys"
+ planet_capital_consumer_goods_desc:0 "Specialization for the capital focusing on consumer goods"

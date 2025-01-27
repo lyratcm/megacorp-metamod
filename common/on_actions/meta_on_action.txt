@@ -1,0 +1,12 @@
+on_yearly_pulse_country = {
+	events = {
+		meta.2
+		meta.6
+		giga_eawaf.30011
+	}
+}
+on_monthly_pulse_country = {
+	events = {
+		meta.3
+	}
+}

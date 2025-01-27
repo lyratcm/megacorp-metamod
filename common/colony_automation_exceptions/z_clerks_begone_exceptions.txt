@@ -1,0 +1,134 @@
+automate_clerks = {
+	available = { is_gestalt = no }
+	emergency = yes
+	category = "planet_automation_clerks"
+
+	job_changes = {
+		clerk_reduce = {
+			available = {
+				always = yes
+			}
+			job = clerk
+			amount = -10
+		}
+
+		clerk_increase = {
+			available = {
+				always = no
+			}
+	
+			job = clerk
+			amount = 1
+		}
+	}
+}
+
+# automate_culture_worker = {
+# 	available = {
+# 		NOR = {
+# 			owner = {
+# 				has_authority = auth_machine_intelligence
+# 				has_authority = auth_hive_mind
+# 			}
+# 		}
+# 	}
+
+# 	category = "planet_automation_culture_worker"
+# 	emergency = yes
+
+# 	buildings = {
+# 		autochthon_monument = {
+# 			building = building_autochthon_monument
+# 			available = {
+# 				#build pop growth first
+# 				or = {
+# 					or = {
+# 						has_building = building_posthumous_employment_center
+# 						owner = {
+# 							#psi ascension doesn't want any assembly
+# 							has_ascension_perk = ap_mind_over_matter
+# 						}
+# 					}
+# 					has_building = building_posthumous_employment_center
+# 					has_building = building_robot_assembly_plant
+# 					has_building = building_machine_assembly_plant
+# 					has_building = building_machine_assembly_complex
+# 					has_building = building_spawning_pool
+# 					has_building = building_necrophage_house_of_apotheosis
+# 					has_building = building_offspring_nest
+# 					has_building = building_necrophage_elevation_chamber
+# 					has_building = building_clone_vats
+# 				}
+# 			}
+# 			owner = {
+# 				num_ascension_perks >= 3
+# 				has_resource = {
+# 					type = minerals
+# 					amount > 1000
+# 				}
+# 			}
+# 		}
+# 	}
+
+# 	job_changes = {
+# 		culture_worker_reduce = {
+#         	available = {
+# 				always = yes
+# 			}
+# 			job = culture_worker
+# 			amount = -1
+# 		}
+
+# 		culture_worker_increase = {
+# 			available = {
+# 				always = no
+# 			}
+	
+# 			job = culture_worker
+# 			amount = 1
+# 		}
+# 	}
+# }
+
+
+automate_starting_amenties = {
+	available = {
+		free_amenities <= -0
+		owner = {
+			NOR = {
+				has_authority = auth_machine_intelligence
+				has_authority = auth_hive_mind
+			}
+		}
+	}
+
+	emergency = yes
+	category = "automate_starting_amenties"
+	
+	buildings = {
+		luxury_residence = {
+			building = building_luxury_residence
+			available = {
+				not = {
+					has_building = building_luxury_residence
+				}
+			}
+		}
+		holo_theatres = {
+			building = building_holo_theatres
+			available = {
+				has_building = building_luxury_residence
+			}
+		}
+	}
+
+	job_changes = {
+		job_colonist_add_reduce = {
+			available = {
+				free_jobs >= 0
+			}
+			job = colonist
+			amount = -1
+		}
+	}
+}

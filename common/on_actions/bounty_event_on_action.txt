@@ -1,0 +1,18 @@
+on_game_start = {
+	events = {
+		bounty_event.1
+	}
+}
+
+# No scope, like on_game_start
+on_yearly_pulse_country = {
+	events = {
+		bounty_event.2
+	}
+}
+
+on_monthly_pulse_country = {
+	events = {
+		bounty_event.3
+	}
+}

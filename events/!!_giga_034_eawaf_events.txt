@@ -1,0 +1,152 @@
+namespace = giga_eawaf
+
+#Faust is kill
+planet_event = {
+	id = giga_eawaf.2007
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		exists = root
+	}
+
+	immediate = {
+		event_target:global_event_country = { #Crisis Spawn
+			#swapped spawning to scale off of mid/end
+			if = {
+				limit = { check_variable = { which = sirens_spawn_date value = 2200 } }
+				set_variable = { which = eawaf_year value = 5 }
+			}
+			else_if = {
+				limit = { check_variable = { which = sirens_spawn_date value = 2250 } }
+				set_variable = { which = eawaf_year value = 15 }
+			}
+			else_if = {
+				limit = { check_variable = { which = sirens_spawn_date value = 2300 } }
+				set_variable = { which = eawaf_year value = 65 }
+			}
+			else_if = {
+				limit = { check_variable = { which = sirens_spawn_date value = 2350 } }
+				set_variable = { which = eawaf_year value = 115 }
+			}
+			else_if = {
+				limit = { check_variable = { which = sirens_spawn_date value = 2400 } }
+				set_variable = { which = eawaf_year value = 165 }
+			}
+			else_if = {
+				limit = { check_variable = { which = sirens_spawn_date value = 2450 } }
+				set_variable = { which = eawaf_year value = 215 }
+			}
+			else_if = {
+				limit = { check_variable = { which = sirens_spawn_date value = 2500 } }
+				set_variable = { which = eawaf_year value = 265 }
+			}
+			else_if = {
+				limit = { check_variable = { which = sirens_spawn_date value = 2550 } }
+				set_variable = { which = eawaf_year value = 132 }
+			}
+		}
+		solar_system = { #Delete everything
+			if = {
+				limit = { exists = space_owner } #Message to system owner
+				space_owner = { country_event = { id = giga_eawaf.20071 } }
+				every_country = { #Message to everyone else
+					limit = { is_regular_empire = yes NOT = { is_country = PREV.space_owner } }
+					country_event = { id = giga_eawaf.20072 }
+				}
+			}
+			else = {
+				every_country = { #Message to everyone else
+					limit = { is_regular_empire = yes }
+					country_event = { id = giga_eawaf.20072 }
+				}
+			}
+			set_star_class = sc_giga_eawaf_faust_shroud
+			set_star_flag = siegfried_anti_jump_star #To prevent jumps, don't want to overwrite
+			every_system_ambient_object = { destroy_ambient_object = this }
+			event_target:giga_eawaf_planet = {
+				create_ambient_object = {
+					type = giga_eawaf_faust_system_shroud_object
+					location = this
+					use_3d_location = yes
+				}
+				create_ambient_object = {
+					type = "star_explosion"
+					play_animation_once = yes
+					location = THIS
+				}
+			}
+			every_system_planet = {
+				limit = { is_colony = yes }
+				destroy_colony = yes
+			}
+			every_system_planet = { #Remove all but the central empty space "star"
+				limit = { NOT = { is_planet_class = pc_giga_empty_space } }
+				remove_planet = yes
+			}
+			every_fleet_in_system = { destroy_fleet = this }
+			every_system_megastructure = {
+				limit = { NOT = { mega_blokkats_wont_stripmine = yes } }
+				remove_megastructure = THIS
+			}
+			set_asteroid_belt = { radius = 0 }
+			every_neighbor_system = { remove_hyperlane = { from = this to = prev } }
+		}
+	}
+}
+
+#Start the crisis, send notification that field is about to dissipate
+event = {
+	id = giga_eawaf.30011
+	hide_window = yes
+	location = from
+	is_triggered_only = yes
+
+	trigger = {
+		or = {
+			and = {
+				check_variable = { which = sirens_spawn_date value = 2200 }
+				years_passed >= 0
+			}
+			and = {
+				check_variable = { which = sirens_spawn_date value = 2250 }
+				years_passed >= 50
+			}
+			and = {
+				check_variable = { which = sirens_spawn_date value = 2300 }
+				mid_game_years_passed >= 0
+			}
+			and = {
+				check_variable = { which = sirens_spawn_date value = 2350 }
+				mid_game_years_passed >= 50
+			}
+			and = {
+				check_variable = { which = sirens_spawn_date value = 2400 }
+				end_game_years_passed >= 0
+			}
+			and = {
+				check_variable = { which = sirens_spawn_date value = 2450 }
+				end_game_years_passed >= 50
+			}
+			and = {
+				check_variable = { which = sirens_spawn_date value = 2500 }
+				end_game_years_passed >= 100
+			}
+			and = {
+				check_variable = { which = sirens_spawn_date value = 2550 }
+				end_game_years_passed >= 150
+			}
+		}
+		exists = root
+		NOT = { has_global_flag = gigas_prevent_sirens }
+	}
+
+	immediate = {
+		every_playable_country = {
+			country_event = { id = giga_eawaf.30001 days = 2 } #Notification
+		}
+		event_target:giga_eawaf_system = {
+			system_event = { id = giga_eawaf.3000 days = 1400 random = 800 } #Start the Crisis proper
+		}
+	}
+}

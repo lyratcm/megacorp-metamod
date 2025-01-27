@@ -1,0 +1,164 @@
+namespace = lootbox_crisis
+#Evil Twins
+situation_event = {
+	id = lootbox_crisis.1070
+	title = lootbox_crisis.1070.title
+	desc = lootbox_crisis.1070.desc
+	picture = GFX_evt_small_space_battle
+	show_sound = event_space_battle
+	is_triggered_only = yes
+	location = event_target:lootbox_location
+	situation = this
+	trigger = {
+		always = no
+	}
+	immediate = {
+		if = {
+			limit = {
+				NOT = {
+					exists = event_target:lootbox_country_hostile
+				}
+			}
+			create_country = {
+				name = "NAME_lootbox_country_hostile"
+				type = lootbox_from_other_space_hostile
+				flag = {
+					icon = {
+						category="corporate"
+						file="corporate_08.dds"
+					}
+					background= {
+						category="backgrounds"
+						file="flag_BG_19.dds"
+					}
+					colors={
+						"intense_red"
+						"black"
+						"null"
+						"null"
+					}
+				}
+			}
+			last_created_country = {
+				save_global_event_target_as = lootbox_country_hostile
+				set_faction_hostility = {
+					set_hostile = yes
+					set_neutral = no
+					set_friendly = no
+				}
+			}
+		}
+		event_target:lootbox_country_hostile = {
+			establish_communications_no_message = root
+		}
+		owner = {
+			set_country_flag = lootbox_crisis_evil_twin_happened
+			set_timed_country_flag = {
+				flag = lootbox_crisis_random_event_cooldown
+				days = 240
+			}
+			set_variable = {
+				which = lootbox_country_ship_num
+				value = 100
+			}
+			change_variable = {
+				which = lootbox_country_ship_num
+				value = trigger:empire_size
+			}
+			divide_variable = {
+				which = lootbox_country_ship_num
+				value = 50
+			}
+			round_variable = lootbox_country_ship_num
+			random_system_within_border = {
+				save_event_target_as = lootbox_location
+			}
+			while = {
+				count = lootbox_country_ship_num
+				random_galaxy_planet = {
+					save_event_target_as = lootbox_selected_location
+				}
+				create_fleet_from_naval_cap = 0.125
+				last_created_fleet = {
+					set_owner = event_target:lootbox_country_hostile
+					set_location = event_target:lootbox_location
+					set_fleet_flag = lootbox_crisis_rogue_ship
+					queue_actions = {
+						repeat = {
+							find_closest_system = {
+								trigger = {
+									id = "lootbox_rogue_ship.1"
+									#is_owned_by = from
+									NOT = {
+										has_star_flag = lootbox_rogue_ship_visit_recently
+									}
+									NOT = {
+										any_fleet_in_system = {
+											has_fleet_flag = lootbox_crisis_rogue_ship
+										}
+									}
+								}
+
+								found_system = {
+									effect = {
+										id = "lootbox_rogue_ship.1a"
+										set_timed_star_flag = {
+											flag = lootbox_rogue_ship_visit_recently
+											days = 5
+										}
+									}
+									move_to = THIS
+									wait = {
+										duration = 1
+									}
+									find_closest_planet = {
+										trigger = {
+											id = "lootbox_rogue_ship.2"
+											NOT = {
+												has_planet_flag = lootbox_rogue_ship_visit_recently
+											}
+										}
+										found_planet = {
+											effect = {
+												id = "lootbox_rogue_ship.2a"
+												set_timed_planet_flag = {
+													flag = lootbox_rogue_ship_visit_recently
+													days = 60
+												}
+											}
+											move_to = THIS
+											orbit_planet = THIS
+											wait = {
+												duration = 10
+												random = 20
+											}
+										}
+									}
+								}
+								failed = {
+									find_random_planet = {
+										found_planet = {
+											move_to = THIS
+											orbit_planet = THIS
+											wait = {
+												duration = 10
+												random = 20
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+			}
+
+		}
+	}
+	after = {
+	}
+	option = {
+		name = lootbox_crisis.1070.a
+	}
+}

@@ -1,0 +1,101 @@
+terraform_link = {
+	from = "pc_ds_hyperflora"
+	to = "pc_gaia"
+	resources = {
+		category = terraforming
+		cost = {
+			energy = 5000
+			minerals = 5000
+		}
+	}
+	duration = 1500
+	ai_weight = { weight = 10 }
+	condition = {
+		has_technology = "tech_terrestrial_sculpting"
+		NOT = { has_origin = "origin_ds_hyperflora" }
+	}
+}
+
+
+terraform_link = {
+	from = "pc_gaia"
+	to = "pc_ds_hyperflora"
+	resources = {
+		category = terraforming
+		cost = {
+			energy = 5000
+			minerals = 5000
+		}
+	}
+	duration = 1500
+	ai_weight = { weight = 0 }
+#	condition = { has_technology = "tech_terrestrial_sculpting" }
+	potential = { has_origin = "origin_ds_hyperflora" }
+}
+
+terraform_link = {
+	from = "pc_pd_cold_gaia"
+	to = "pc_ds_hyperflora"
+	resources = {
+		category = terraforming
+		cost = {
+			energy = 5000
+			minerals = 5000
+		}
+	}
+	duration = 1500
+	ai_weight = { weight = 0 }
+	#	condition = { has_technology = "tech_terrestrial_sculpting" }
+	potential = { has_origin = "origin_ds_hyperflora" }
+}
+
+terraform_link = {
+	from = "pc_pd_dry_gaia"
+	to = "pc_ds_hyperflora"
+	resources = {
+		category = terraforming
+		cost = {
+			energy = 5000
+			minerals = 5000
+		}
+	}
+	duration = 1500
+	ai_weight = { weight = 0 }
+	#	condition = { has_technology = "tech_terrestrial_sculpting" }
+	potential = { has_origin = "origin_ds_hyperflora" }
+}
+
+terraform_link = {
+	from = "pc_pd_wet_gaia"
+	to = "pc_ds_hyperflora"
+	resources = {
+		category = terraforming
+		cost = {
+			energy = 5000
+			minerals = 5000
+		}
+	}
+	duration = 1500
+	ai_weight = { weight = 0 }
+	#	condition = { has_technology = "tech_terrestrial_sculpting" }
+	potential = { has_origin = "origin_ds_hyperflora" }
+}
+
+terraform_link = {
+	from = "pc_hive"
+	to = "pc_ds_hyperflora"
+	resources = {
+		category = terraforming
+		cost = {
+			energy = 5000
+			minerals = 5000
+		}
+	}
+	duration = 1500
+	ai_weight = { weight = 0 }
+#	condition = { has_technology = "tech_terrestrial_sculpting" }
+	potential = {
+		has_origin = "origin_ds_hyperflora"
+		is_gestalt = yes
+	}
+}

@@ -1,0 +1,64 @@
+lyra_win = {
+	length = 1
+	icon = "GFX_edict_type_time"
+
+	resources = {
+		category = edicts
+		upkeep = {
+			unity = @Edict1Cost
+		}
+	}
+	potential = {
+		custom_tooltip = lyra_win
+        has_country_flag = is_lyra
+		is_ai = no
+	}
+
+	effect = {
+		custom_tooltip = lyra_win_game
+		hidden_effect = {
+			add_resource = {
+				minerals = 1
+			}
+		}
+	}
+
+	ai_weight = {
+		weight = 0
+	}
+}
+
+lyra_win = {
+	length = 1
+	icon = "GFX_edict_type_time"
+
+	resources = {
+		category = edicts
+		upkeep = {
+			unity = @Edict1Cost
+		}
+	}
+	potential = {
+		has_origin = origin_esoteric_scholarium
+		any_pool_leader = {
+			not = {
+				has_trait = trait_curator_defector
+			}
+		}
+	}
+
+	effect = {
+		every_pool_leader = {
+			limit =	{
+				not = {
+					has_trait = trait_curator_defector
+				}
+			}
+			add_trait = trait_curator_defector
+		}
+	}
+
+	ai_weight = {
+		weight = 0
+	}
+}

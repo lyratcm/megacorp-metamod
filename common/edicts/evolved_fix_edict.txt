@@ -1,0 +1,222 @@
+bio_psi = {
+	length = 1
+	icon = "GFX_edict_type_policy"
+
+	resources = {
+		category = edicts
+		upkeep = {
+			unity = @Edict1Cost
+		}
+	}
+	potential = {
+		has_ascension_perk = ap_tec_biopsionic
+		nor = {
+			has_country_flag = fixed_biopsi
+			has_trait = trait_tec_biopsionic
+		}
+	}
+
+	effect = {
+		set_country_flag = fixed_biopsi
+		random_owned_species = {
+			limit = { is_same_species = root }
+			species = {
+				change_species_characteristics = {
+					add_trait = trait_tec_biopsionic
+					add_traits_at_start_of_list = yes
+				}
+			}
+		}
+		every_owned_leader = {
+			limit = {
+				species = { has_trait = trait_tec_biopsionic }
+				NOR = {
+					has_trait = leader_trait_admiral_tec_biopsionic
+					has_trait = leader_trait_general_tec_biopsionic
+					has_trait = leader_trait_governor_tec_biopsionic
+					has_trait = leader_trait_scientist_tec_biopsionic
+					has_trait = leader_trait_ruler_tec_biopsionic
+					has_trait = leader_trait_curator
+				}
+			}
+			if = {
+				limit = { leader_class = admiral }
+				add_trait = leader_trait_admiral_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = general }
+				add_trait = leader_trait_general_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = governor }
+				add_trait = leader_trait_governor_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = scientist }
+				add_trait = leader_trait_scientist_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = ruler }
+				add_trait = leader_trait_ruler_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+		}
+	
+		every_pool_leader = {
+			limit = {
+				species = { has_trait = trait_tec_biopsionic }
+				NOR = {
+					has_trait = leader_trait_admiral_tec_biopsionic
+					has_trait = leader_trait_general_tec_biopsionic
+					has_trait = leader_trait_governor_tec_biopsionic
+					has_trait = leader_trait_scientist_tec_biopsionic
+					has_trait = leader_trait_ruler_tec_biopsionic
+				}
+			}
+			if = {
+				limit = { leader_class = admiral }
+				add_trait = leader_trait_admiral_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = general }
+				add_trait = leader_trait_general_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = governor }
+				add_trait = leader_trait_governor_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = scientist }
+				add_trait = leader_trait_scientist_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = ruler }
+				add_trait = leader_trait_ruler_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+		}
+	}
+
+	ai_weight = {
+		weight = 50000000
+	}
+}
+bio_psi = {
+	length = 1
+	icon = "GFX_edict_type_policy"
+
+	resources = {
+		category = edicts
+		upkeep = {
+			unity = @Edict1Cost
+		}
+	}
+	potential = {
+		has_ascension_perk = ap_tec_biopsionic
+		nor = {
+			has_country_flag = fixed_biopsi
+			has_trait = trait_tec_biopsionic
+		}
+	}
+
+	effect = {
+		set_country_flag = fixed_biopsi
+		random_owned_species = {
+			limit = { is_same_species = root }
+			species = {
+				change_species_characteristics = {
+					add_trait = trait_tec_biopsionic
+					add_traits_at_start_of_list = yes
+				}
+			}
+		}
+		every_owned_leader = {
+			limit = {
+				species = { has_trait = trait_tec_biopsionic }
+				NOR = {
+					has_trait = leader_trait_admiral_tec_biopsionic
+					has_trait = leader_trait_general_tec_biopsionic
+					has_trait = leader_trait_governor_tec_biopsionic
+					has_trait = leader_trait_scientist_tec_biopsionic
+					has_trait = leader_trait_ruler_tec_biopsionic
+					has_trait = leader_trait_curator
+				}
+			}
+			if = {
+				limit = { leader_class = admiral }
+				add_trait = leader_trait_admiral_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = general }
+				add_trait = leader_trait_general_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = governor }
+				add_trait = leader_trait_governor_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = scientist }
+				add_trait = leader_trait_scientist_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = ruler }
+				add_trait = leader_trait_ruler_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+		}
+	
+		every_pool_leader = {
+			limit = {
+				species = { has_trait = trait_tec_biopsionic }
+				NOR = {
+					has_trait = leader_trait_admiral_tec_biopsionic
+					has_trait = leader_trait_general_tec_biopsionic
+					has_trait = leader_trait_governor_tec_biopsionic
+					has_trait = leader_trait_scientist_tec_biopsionic
+					has_trait = leader_trait_ruler_tec_biopsionic
+				}
+			}
+			if = {
+				limit = { leader_class = admiral }
+				add_trait = leader_trait_admiral_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = general }
+				add_trait = leader_trait_general_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = governor }
+				add_trait = leader_trait_governor_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = scientist }
+				add_trait = leader_trait_scientist_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+			if = {
+				limit = { leader_class = ruler }
+				add_trait = leader_trait_ruler_tec_biopsionic
+				add_ruler_trait = leader_trait_ruler_tec_biopsionic
+			}
+		}
+	}
+
+	ai_weight = {
+		weight = 50000000
+	}
+}

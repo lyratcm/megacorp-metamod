@@ -1,0 +1,23 @@
+	NGameplay = {
+		FALLEN_CUSTOM_EMPIRE_SPAWN_CHANCE	= 100	# Chance that a fallen empire will be created from an existing template instead of randomly generated (10 = 1% chance)
+		FALLEN_EMPIRE_OUTER_BOUNDARY = 0	# Outer boundary of galaxy that fallen empire generation will try to avoid
+		FALLEN_EMPIRE_INNER_BOUNDARY	= 0		# Inner boundary of galaxy that fallen empire generation will try to avoid
+		RANDOM_START_DISTANCE = 75		# The minimum distance at which empires will spawn from each other in random start
+		SPAWN_SYSTEM_ATTEMPTS = 150		# Number of times the game will try and find a location for a system created via spawn_system before it defaults to the center of the galaxy. Note: The last two tries ignore SPAWN_SYSTEM_BUFFER_DISTANCE
+		GUARANTEED_COLONIES_DEFAULT = 2
+		GUARANTEED_COLONIES_MIN = 0
+		GUARANTEED_COLONIES_MAX = 100
+
+		# These values control the mid and end game sliders in game setup
+		MID_GAME_START_DEFAULT = 75
+		MID_GAME_START_MAX = 600
+		MID_GAME_START_MIN = 0
+		END_GAME_START_DEFAULT = 100
+		END_GAME_START_MAX = 1200
+		END_GAME_START_MIN = 5
+		START_YEAR_SLIDER_INTERVAL = 5
+		VICTORY_YEAR_DEFAULT = 300
+		VICTORY_YEAR_MAX = 1600
+		VICTORY_YEAR_MIN = 50
+		VICTORY_YEAR_SLIDER_INTERVAL = 50
+	}

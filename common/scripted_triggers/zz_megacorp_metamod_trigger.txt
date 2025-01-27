@@ -1,0 +1,7 @@
+megacorp_metamod_enable = {
+	always = yes
+}
+
+blocks_disruptive_gameplay = {# always disabled for TW
+	is_difficulty >= 0
+}

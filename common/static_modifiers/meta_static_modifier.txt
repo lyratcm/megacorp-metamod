@@ -1,0 +1,3 @@
+meta_empire_size_pops_mult = {
+	empire_size_pops_mult = -1
+}

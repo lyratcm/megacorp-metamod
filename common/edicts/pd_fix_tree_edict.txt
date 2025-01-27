@@ -1,0 +1,266 @@
+pd_tree = {
+	length = 1
+	icon = "GFX_edict_type_time"
+
+	resources = {
+		category = edicts
+		upkeep = {
+			unity = 0
+		}
+	}
+	potential = {
+		has_origin = origin_pd_tree_of_life
+		capital_scope = {
+			has_deposit = d_pd_tree_of_life_2
+			has_modifier = no_pd_lifetree
+		}
+	}
+
+	effect = {
+		capital_scope = {
+			remove_modifier = no_pd_lifetree
+		}
+	}
+
+	ai_weight = {
+		weight = 500
+	}
+}
+
+pd_tree_1 = {
+	length = 1
+	icon = "GFX_edict_type_time"
+
+	resources = {
+		category = edicts
+		upkeep = {
+			unity = 0
+		}
+	}
+	potential = {
+		has_origin = origin_pd_tree_of_life
+		any_owned_planet = {
+			not = {
+				has_deposit = d_pd_tree_of_life_2
+			}
+		}
+		years_passed < 1
+	}
+
+	effect = {
+		every_owned_planet = {
+			limit = {
+				not = {
+					has_deposit = d_pd_tree_of_life_2
+				}
+			}
+			add_deposit = d_pd_tree_of_life_2
+		}
+	}
+
+	ai_weight = {
+		weight = 500
+	}
+}
+
+pd_terraform_tree = {
+	length = 1
+	icon = "GFX_edict_type_time"
+
+	resources = {
+		category = edicts
+		upkeep = {
+			unity = 0
+		}
+	}
+	potential = {
+		has_origin = origin_pd_tree_of_life
+		any_owned_planet = {
+			NOT = { has_planet_flag = pd_tol1 }
+			NOT = { has_planet_flag = pd_tol2 }
+			NOT = { has_planet_flag = pd_tol3 }
+			or = {
+				is_planet_class = pc_dormant
+				is_planet_class = pc_dormant_cold
+				is_planet_class = pc_dormant_frozen
+				is_planet_class = pc_dormant_molten
+				is_planet_class = pc_dormant_toxic
+			}
+		}
+	}
+
+	effect = {
+		every_owned_planet = {
+			limit = {
+				not = {
+					has_planet_flag = pd_tol1	
+				}
+			}
+			set_planet_flag = pd_tol1	
+			IF = {
+				limit = { owner = { NOT = { has_technology = tech_pdtoltech } } }
+				planet_event = { id = pdengine.40 days = 5400 random = 5400 }
+			}
+			IF = {
+				limit = { owner = { has_technology = tech_pdtoltech } }
+				planet_event = { id = pdengine.40 days = 3600 random = 3600 }
+			}
+		}
+	}
+
+	ai_weight = {
+		weight = 500
+	}
+}
+
+pd_terraform_tree_2 = {
+	length = 1
+	icon = "GFX_edict_type_time"
+
+	resources = {
+		category = edicts
+		upkeep = {
+			unity = 0
+		}
+	}
+	potential = {
+		has_origin = origin_pd_tree_of_life
+		any_owned_planet = {
+			or = {
+				is_planet_class = pc_dormant
+				is_planet_class = pc_dormant_cold
+				is_planet_class = pc_dormant_frozen
+				is_planet_class = pc_dormant_molten
+				is_planet_class = pc_dormant_toxic
+			}
+		}
+		years_passed > 15
+	}
+
+	effect = {
+		every_owned_planet = {
+			limit = {
+				not = {
+					has_planet_flag = pd_tol2
+				}
+				or = {
+					is_planet_class = pc_dormant
+					is_planet_class = pc_dormant_cold
+					is_planet_class = pc_dormant_frozen
+					is_planet_class = pc_dormant_molten
+					is_planet_class = pc_dormant_toxic
+				}
+			}
+			IF = {
+				limit = {
+					or = {
+						and = {
+							owner = {
+								capital_scope = {
+									is_pd_superhab = no
+									is_pd_tidally_locked = no
+									is_pd_cave = no
+								}
+							}
+							or = {
+								is_planet_class = pc_dormant
+								is_planet_class = pc_dormant_cold
+								is_planet_class = pc_dormant_frozen
+								is_planet_class = pc_dormant_molten
+								is_planet_class = pc_dormant_toxic
+							}
+						}
+						is_pd_superhab = no
+						is_pd_tidally_locked = no
+						is_pd_cave = no
+					}
+				}
+				change_pc = pc_megaflorahive
+			}
+			IF = {
+				limit = {
+					or = {
+						and = {
+							owner = {
+								capital_scope = {
+									is_pd_tidally_locked = yes
+								}
+							}
+							or = {
+								is_planet_class = pc_dormant
+								is_planet_class = pc_dormant_cold
+								is_planet_class = pc_dormant_frozen
+								is_planet_class = pc_dormant_molten
+								is_planet_class = pc_dormant_toxic
+							}
+						}
+						is_pd_tidally_locked = yes
+					}
+				}
+				change_pc = pc_megaflorahivetl
+			}
+			IF = {
+				limit = {
+					or = {
+						and = {
+							owner = {
+								capital_scope = {
+									is_pd_superhab = yes
+								}
+							}
+							or = {
+								is_planet_class = pc_dormant
+								is_planet_class = pc_dormant_cold
+								is_planet_class = pc_dormant_frozen
+								is_planet_class = pc_dormant_molten
+								is_planet_class = pc_dormant_toxic
+							}
+						}
+						is_pd_superhab = yes
+					}
+				}
+				change_pc = pc_megaflorahive_superhab
+			}
+			IF = {
+				limit = {
+					or = {
+						and = {
+							owner = {
+								capital_scope = {
+									is_pd_cave = yes
+								}
+							}
+							or = {
+								is_planet_class = pc_dormant
+								is_planet_class = pc_dormant_cold
+								is_planet_class = pc_dormant_frozen
+								is_planet_class = pc_dormant_molten
+								is_planet_class = pc_dormant_toxic
+							}
+						}
+						is_pd_cave = yes
+					}
+				}
+				change_pc = pc_megaflorahive_cave
+			}
+			pd_remove_special_deposits_modifiers = yes
+			remove_planet_flag = pd_tol1
+			set_planet_flag = pd_tol2
+			add_modifier = { modifier = pdmegaflora }
+			remove_deposit = d_pd_tree_of_life_1
+			add_deposit = d_pd_tree_of_life_2
+			IF = {
+				limit = { owner = { NOT = { has_technology = tech_pdtoltech } } }
+				planet_event = { id = pdengine.41 days = 18000 random = 18000 }
+			}
+			IF = {
+				limit = { owner = { has_technology = tech_pdtoltech } }
+				planet_event = { id = pdengine.41 days = 9000 random = 9000 }
+			}
+		}
+	}
+
+	ai_weight = {
+		weight = 500
+	}
+}

@@ -1,0 +1,122 @@
+building_ancient_energy = {
+	empire_limit = { base = 5 }
+	base_cap_amount = 1
+	category = resource
+	base_buildtime = 360
+	can_build = yes
+	can_demolish = yes
+	planet_modifier = { planet_amenities_add = -2 }
+	resources = {
+		category = planet_buildings
+		produces = { energy = 25 }
+		cost = {
+			minerals = 550
+			sr_dark_matter = 50
+		}
+	}
+	planet_modifier = {
+		planet_technician_energy_produces_add = 0.70
+	}
+	prerequisites = { tech_ds_arcane_building }
+}
+
+building_ancient_fabricator = {
+	empire_limit = { base = 5 }
+	base_cap_amount = 1
+	category = resource
+	base_buildtime = 360
+	can_build = yes
+	can_demolish = yes
+	icon = building_nanite_transmuter
+	planet_modifier = { planet_amenities_add = -2 }
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 550
+			sr_dark_matter = 50
+		}
+		upkeep = { energy = 10 }
+	}
+	planet_modifier = {
+		planet_miners_minerals_produces_add = 0.70
+	}
+	prerequisites = { tech_ds_arcane_building }
+}
+
+building_ancient_forge = {
+	empire_limit = { base = 5 }
+	base_cap_amount = 1
+	category = resource
+	base_buildtime = 360
+	can_build = yes
+	can_demolish = yes
+	planet_modifier = { planet_amenities_add = -2 }
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 550
+			sr_dark_matter = 50
+		}
+		upkeep = { energy = 10 }
+	}
+	planet_modifier = {
+		planet_metallurgists_alloys_produces_add = 0.5
+	}
+	prerequisites = { tech_ds_arcane_building }
+}
+
+building_ancient_unity = {
+	empire_limit = { base = 5 }
+	base_cap_amount = 1
+	category = resource
+	base_buildtime = 360
+	icon = building_paradise_dome
+	can_build = yes
+	can_demolish = yes
+	planet_modifier = { planet_amenities_add = -2 }
+	country_modifier = {
+		country_naval_cap_add = 25
+	}
+	resources = {
+		category = planet_buildings
+		produces = { unity = 25 }
+		cost = {
+			minerals = 550
+			sr_dark_matter = 50
+		}
+		upkeep = { energy = 10 }
+	}
+	planet_modifier = {
+		planet_jobs_unity_produces_mult = 0.75
+	}
+	prerequisites = { tech_ds_arcane_building }
+}
+
+building_ancient_science = {
+	empire_limit = { base = 7 }
+	base_cap_amount = 1
+	category = resource
+	base_buildtime = 360
+	can_build = yes
+	can_demolish = yes
+	planet_modifier = { planet_amenities_add = -2 }
+	resources = {
+		category = planet_buildings
+		produces = {
+			physics_research = 15
+			society_research = 15
+			engineering_research = 15
+		}
+		cost = {
+			minerals = 550
+			sr_dark_matter = 50
+		}
+		upkeep = { energy = 10 }
+	}
+	planet_modifier = {
+		planet_researchers_physics_research_produces_add = 0.3
+		planet_researchers_society_research_produces_add = 0.3
+		planet_researchers_engineering_research_produces_add = 0.3
+	}
+	prerequisites = { tech_ds_arcane_building }
+}

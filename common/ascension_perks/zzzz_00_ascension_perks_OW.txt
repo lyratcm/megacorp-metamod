@@ -1,0 +1,222 @@
+
+#################
+# TOXIC ASCENSION PERKS
+#################
+
+ap_detox = {
+	potential = {
+		host_has_dlc = "Toxoids Species Pack"
+		NOT = {
+			has_ascension_perk = ap_detox
+		}
+	}
+
+	possible = {
+		custom_tooltip = {
+			fail_text = "requires_technology_tech_climate_restoration"
+			has_technology = tech_climate_restoration
+		}
+		any_planet_within_border = {
+			has_modifier = toxic_terraforming_candidate
+		}
+	}
+
+	on_enabled = {
+		custom_tooltip = "detox_tox_worlds"
+	}
+
+	ai_weight = {
+		factor = 20
+		modifier = {
+			factor = 0
+			NOT = {
+				any_planet_within_border = {
+					has_modifier = toxic_terraforming_candidate
+				}
+			}
+		}
+		modifier = {
+			factor = 3
+			count_planet_within_border = {
+				count > 2
+				limit = { has_modifier = toxic_terraforming_candidate }
+			}
+		}
+	}
+}
+
+
+ap_cosmogenesis = {
+	potential = {
+		is_ai = yes
+		has_machine_age_dlc = yes
+		NOR = {
+			has_ascension_perk = ap_become_the_crisis
+			has_ascension_perk = ap_cosmogenesis
+			has_ascension_perk = ap_defender_of_the_galaxy
+			has_origin = origin_slavers # No crisis for MSI
+		}
+	}
+
+	possible = {
+		is_ai = yes
+		custom_tooltip = {
+			fail_text = "requires_ascension_perks_3"
+			num_ascension_perks > 2
+		}
+		custom_tooltip = {
+			fail_text = "requires_independence"
+			is_subject = no
+		}
+		custom_tooltip = {
+			fail_text = "must_not_be_custodian"
+			is_galactic_custodian = no
+		}
+		custom_tooltip = {
+			fail_text = "must_not_be_emperor"
+			is_galactic_emperor = no
+		}
+	}
+
+	on_enabled = {
+		hidden_effect = {
+			set_variable = {
+				which = cosmogenesis_world_advanced_logic_produced
+				value = 0
+			}
+		}
+		activate_crisis_progression = cosmogenesis_path
+	}
+
+	ai_weight = {
+		factor = 7.5
+		modifier = {
+			factor = 0
+			OR = {
+				is_egalitarian = yes
+				is_xenophile = yes
+			}
+		}
+		modifier = {
+			factor = 2
+			has_tradition = tr_discovery_finish
+		}
+		modifier = {
+			factor = 2
+			has_ascension_perk = ap_technological_ascendancy
+		}
+		modifier = {
+			factor = 2
+			has_ascension_perk = ap_enigmatic_engineering
+		}
+		modifier = {
+			factor = 2
+			vassals > 0
+			any_subject = {
+				any_agreement = {
+					has_active_specialization = specialist_scholarium
+				}
+			}
+		}
+		modifier = {
+			factor = 10
+			has_country_flag = whisperers_covenant_confirmed
+		}
+		modifier = {
+			factor = 0
+			galaxy_percentage < 0.1
+		}
+		modifier = {
+			factor = 2
+			galaxy_percentage > 0.2
+		}
+	}
+}
+
+
+ap_become_the_crisis = {
+	potential = {
+		has_nemesis = yes
+		NOR = {
+			has_ascension_perk = ap_become_the_crisis
+			has_ascension_perk = ap_cosmogenesis
+			has_ascension_perk = ap_defender_of_the_galaxy
+			has_origin = origin_slavers
+		}
+	}
+
+	possible = {
+		years_passed >= 75
+		custom_tooltip = {
+			fail_text = "requires_ascension_perks_3"
+			num_ascension_perks > 2
+		}
+		custom_tooltip = {
+			fail_text = "requires_independence"
+			is_subject = no
+		}
+		custom_tooltip = {
+			fail_text = "must_not_be_custodian"
+			is_galactic_custodian = no
+		}
+		custom_tooltip = {
+			fail_text = "must_not_be_emperor"
+			is_galactic_emperor = no
+		}
+		NOR = {
+			has_ethic = ethic_xenophile
+			has_ethic = ethic_fanatic_xenophile
+			has_ethic = ethic_pacifist
+			has_ethic = ethic_fanatic_pacifist
+			has_civic = civic_machine_servitor
+		}
+	}
+
+	on_enabled = {
+		hidden_effect = {
+			set_ai_personality = became_the_crisis
+		}
+		activate_crisis_progression = nemesis_path
+	}
+
+	ai_weight = {
+		factor = 7.5
+		modifier = {
+			factor = 0
+			NOR = {
+				is_militarist = yes
+				is_xenophobe = yes
+				is_gestalt = yes
+			}
+		}
+		modifier = {
+			factor = 10
+			is_homicidal = yes
+		}
+		modifier = {
+			factor = 2
+			has_tradition = tr_supremacy_finish
+		}
+		modifier = {
+			factor = 0
+			galaxy_percentage < 0.1
+		}
+		modifier = {
+			factor = 2
+			galaxy_percentage > 0.2
+		}
+		modifier = {
+			factor = 0
+			count_playable_country = {
+				count > 1
+				limit = {
+					has_ascension_perk = ap_become_the_crisis
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			blocks_disruptive_gameplay = yes
+		}
+	}
+}
