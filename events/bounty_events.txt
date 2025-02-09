@@ -20,14 +20,26 @@ country_event = {
 			save_global_event_target_as = ctf_target
 		}
 		set_global_flag = ESC_AI_research_boost_challenging_scaling
-		every_playable_country = {
-			country_event = { id = esc_events.5000 days = 0 }
-		}
 	}
 }
 
 country_event = {
 	id = bounty_event.2
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		has_country_flag = host
+	}
+	immediate = {
+		country_event = {
+			id = bounty_event.21
+			days = 1
+		}
+	}
+}
+
+country_event = {
+	id = bounty_event.21
 	is_triggered_only = yes
 	hide_window = yes
 	trigger = {
@@ -72,29 +84,11 @@ country_event = {
 					}
 				}
 				solar_system.owner = {
-					#remove previous owners modifier
-					if = {
-						limit = {
-							exists = event_target:ctf_bonus_country
-							not = {
-								event_target:ctf_bonus_country = {
-									is_same_empire = prev
-								}
-							}
-						}
-						event_target:ctf_bonus_country = {
-							remove_modifier = bounty_unity_bonus
-						}
-					}
 					save_global_event_target_as = ctf_bonus_country
 					add_modifier = {
 						modifier = bounty_unity_bonus
-						mult = value:bountry_unity_scale
+						mult = value:bounty_unity_scale
 					}
-					# add_monthly_resource_mult = {
-					# 	resource = unity
-					# 	value = 12
-					# }
 				}
 			}
 			else_if = {

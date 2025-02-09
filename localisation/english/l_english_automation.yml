@@ -12,3 +12,4 @@
  planet_capital_industrial_desc:0 "Specialization for the capital focusing on alloys and consumer goods"
  planet_capital_alloys_desc:0 "Specialization for the capital focusing on alloys"
  planet_capital_consumer_goods_desc:0 "Specialization for the capital focusing on consumer goods"
+ test_name:0 "test$test_var$"

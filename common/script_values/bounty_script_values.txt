@@ -1,4 +1,4 @@
-bountry_unity_scale = {
+bounty_unity_scale = {
 	weight = modifier:country_unity_produces_mult
-	subtract = country_unity_produces_mult_offset
+	subtract = modifier:country_unity_produces_mult_offset
 }

@@ -1,7 +1,3 @@
-empire_size_pops_mult_offset = {
-	category = country
-}
-
 country_unity_produces_mult_offset = {
 	category = country
 }

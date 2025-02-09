@@ -1,3 +1,7 @@
 meta_empire_size_pops_mult = {
 	empire_size_pops_mult = -1
 }
+
+meta_starbases_upkeep_mult = {
+	starbases_upkeep_mult = -1
+}

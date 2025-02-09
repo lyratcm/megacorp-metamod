@@ -1,4 +1,5 @@
 namespace = giga_eawaf
+# 2 overwrites of parts of the file as 2 different authors have fixed different parts. this contains a way to bump up the timeline of the ponies to a resonable time frame and the other fixes some bug that stops part of them spawning correctly
 
 #Faust is kill
 planet_event = {
@@ -102,8 +103,10 @@ event = {
 	location = from
 	is_triggered_only = yes
 
+	# presumes a 2300 mid game 2400 end game but can be any date as they now scale off of mid/end year
 	trigger = {
 		or = {
+			# the first 2 may lead to it happening before the ponies dissapeear but thats not on me
 			and = {
 				check_variable = { which = sirens_spawn_date value = 2200 }
 				years_passed >= 0
@@ -137,7 +140,6 @@ event = {
 				end_game_years_passed >= 150
 			}
 		}
-		exists = root
 		NOT = { has_global_flag = gigas_prevent_sirens }
 	}
 

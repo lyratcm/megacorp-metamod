@@ -1,0 +1,1367 @@
+namespace = giga_eawaf
+
+country_event = {
+	id = giga_eawaf.7000
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_country_type = primitive
+		has_country_flag = machine_age
+	}
+
+	immediate = {
+		if = { # If Sirens are disabled, chance of a random nuclear war
+			limit = { has_global_flag = giga_eawaf_sirens_disabled }
+			random = {
+				chance = 30
+				country_event = { id = giga_eawaf.7003 days = 3000 random = 1200 } #Nuclear War, change
+			}
+			country_event = { id = giga_eawaf.7005 days = 7200 }
+		}
+		else = { #If Sirens are enabled, the Sirens start their takeover in five years.
+			if = {
+				limit = { event_target:global_event_country = { check_variable = { which = sirens_spawn_date value = 2200 } } }
+				event_target:giga_eawaf_planet = { planet_event = { id = giga_eawaf.2000 days = 30 } }
+			}
+			else = {
+				event_target:giga_eawaf_planet = { planet_event = { id = giga_eawaf.2000 days = 1800 random = 60 } }
+			}
+		}
+		remove_country_flag = machine_age
+		set_country_flag = atomic_age
+		set_pre_ftl_age = atomic_age
+		home_planet = {
+			while = { count = 2 create_pop = { species = event_target:eawaf_ponies } }
+			while = { count = 3 create_pop = { species = event_target:eawaf_griffons } }
+			while = { count = 2 create_pop = { species = event_target:eawaf_changelings } }
+			while = { count = 1 create_pop = { species = event_target:eawaf_yetis } }
+			while = { count = 2 create_pop = { species = event_target:eawaf_zebras } }
+			add_building = building_urban_dwellings
+			add_deposit = d_decrepit_dwellings
+			add_deposit = d_failing_infrastructure
+			if = {
+				limit = {
+					exists = observation_outpost_owner
+				}
+				observation_outpost_owner = {
+					country_event = { id = giga_eawaf.7002 }
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = giga_eawaf.7010
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_country_type = primitive
+	}
+	immediate = {
+		#Determine unifier
+		if = {
+			limit = { NOT = { has_country_flag = eaw_unifier_determined } }
+			random_list = {
+				20 = { 	#Equestria-led UN (egalitarian pacifist spiritualist)
+					set_country_flag = giga_eaw_un_unifier
+					modifier = { add = 10000 event_target:giga_eawaf_planet = { has_planet_flag = giga_eawaf_alicorns_mobilized } }
+				}
+				10 = { set_country_flag = giga_eaw_river_unifier } #Riverfed-led UN (fanaticegalitarian materialist)
+
+				20 = { set_country_flag = giga_eaw_griffon_unifier } #Griffonian Empire (authoritarian militarist)
+				10 = { set_country_flag = giga_eaw_wingaqui_unifier } #Aquileia-Wingbardy Empire (authoritarian materialist)
+				10 = { #Hypercapitalist Fickle Kiria (megacorp)
+					set_country_flag = giga_eaw_kiria_unifier
+					modifier = {
+						factor = 0
+						NOT = { host_has_dlc = "Megacorp" }
+					}
+				}
+
+				10 = { set_country_flag = giga_eaw_communist_unifier } #Skynavia-led Socialists (fanaticegalitarian militarist) 
+				20 = {  #Posada-led Socialists (egalitarian militarist materialist)
+					set_country_flag = giga_eaw_posada_unifier
+					modifier = { add = 10000 event_target:giga_eawaf_planet = { has_planet_flag = giga_eawaf_alicorns_mobilized } }
+				}
+
+				100 = { set_country_flag = giga_eaw_dread_unifier } #Dread Scourge (devouring swarm)
+				0 = { #Leopold (assimilators)
+					set_country_flag = giga_eaw_leopold_unifier
+					modifier = {
+						factor = 0
+						NOT = { host_has_dlc = "Synthetic Dawn Story Pack" }
+					}
+				}
+				0 = { #Kayzoo????
+					set_country_flag = giga_eaw_kaiser_unifier
+					modifier = {
+						add = 10000
+						OR = {
+							has_global_flag = giga_jublio_disabled
+							has_global_flag = meopa_spawned_as_fe
+						}
+					}
+					modifier = {
+						factor = 0
+						OR = {
+							has_global_flag = katzenartig_never
+							has_global_flag = katzenartig_disabled
+							has_global_flag = pki_katzen_is_being_played
+						}
+					}
+				}
+			}
+			set_country_flag = eaw_unifier_determined
+		}
+		#All unifiers get this
+		remove_country_flag = early_space_age
+		set_country_type = default
+		event_target:giga_eawaf_planet = {
+    		create_country = {
+				name = "Subscribe to Equestria at War" #Best HOI4 mod
+				type = giga_t2_tech_dump
+				effect = { save_global_event_target_as = eaw_tech_dump }
+			}
+		}
+		copy_techs_from = { target = event_target:eaw_tech_dump }
+		event_target:eaw_tech_dump = { destroy_country = yes }
+		set_country_flag = giga_faust_weaponry_possible
+		country_event = {
+			id = giga_eawaf.70101
+			days = 1
+		}
+		force_remove_civic = civic_atmospheric_pollution
+		force_remove_civic = civic_increasing_urbanization
+		country_remove_ethic = ethic_spiritualist
+		country_remove_ethic = ethic_fanatic_spiritualist
+		country_remove_ethic = ethic_egalitarian
+		country_remove_ethic = ethic_fanatic_egalitarian
+		country_remove_ethic = ethic_fanatic_cooperative
+		country_remove_ethic = ethic_cooperative
+		create_ship_design = { design = "Griffonia" }
+		add_ship_design = last_created_design
+		create_ship_design = { design = "Zebrica" }
+		add_ship_design = last_created_design
+		add_resource = {
+			minerals = 20000
+			alloys = 10000
+			energy = 50000
+			food = 20000
+			consumer_goods = 20000
+			exotic_gases = 5000
+			volatile_motes = 5000
+			rare_crystals = 5000
+			influence = 500
+		}
+		home_planet = {
+			remove_all_buildings = yes
+			add_building = building_major_capital
+			set_capital = yes
+			while = {
+				count = 3
+				add_district = {
+					district_type = district_city
+					ignore_cap = yes
+				}
+			}
+			while = {
+				count = 2
+				add_district = {
+					district_type = district_industrial
+					ignore_cap = yes
+				}
+			}
+			while = {
+				count = 3
+				add_district = {
+					district_type = district_farming
+					ignore_cap = yes
+				}
+			}
+			while = {
+				count = 3
+				add_district = {
+					district_type = district_mining
+					ignore_cap = yes
+				}
+			}
+			while = {
+				count = 3
+				add_district = {
+					district_type = district_generator
+					ignore_cap = yes
+				}
+			}
+			add_building = building_research_lab_1
+			add_building = building_research_lab_1
+			add_building = building_foundry_1
+			add_building = building_temple
+			add_building = building_commercial_zone
+			remove_all_armies = yes
+			set_owner = event_target:giga_eawaf_country
+			set_controller = event_target:giga_eawaf_country
+		}
+		every_country = {
+			establish_communications_no_message = event_target:giga_eawaf_country
+		}
+		every_country = {
+			establish_contact = {
+				who = event_target:giga_eawaf_country
+				location = event_target:giga_eawaf_system
+			}
+		}
+		#Kaiser Kattail Real
+		if = {
+			limit = { has_country_flag = giga_eaw_kaiser_unifier }
+			if = {
+				limit = { has_global_flag = silly_flusionian_portraits_enabled_cattail }
+				create_species = {
+					name = "Abyssinian?"
+					plural = "Abyssinian?"
+					class = Flusionian
+					portrait = kaiser
+					homeworld = event_target:gigaflusion
+					traits = {
+						trait = trait_pc_continental_preference
+						trait = trait_quick_learners
+						trait = trait_talented
+						trait = trait_venerable
+					}
+					effect = {
+						set_global_flag = kaiser_portrait_defined
+						save_global_event_target_as = gigakaiserportrait
+					}
+				}
+			}
+			else = {
+				create_species = {
+					name = "Abyssinian?"
+					plural = "Abyssinian?"
+					class = POUCHKINN
+					portrait = Kattail_1
+					homeworld = event_target:gigaflusion
+					traits = {
+						trait = trait_pc_continental_preference
+						trait = trait_quick_learners
+						trait = trait_talented
+						trait = trait_venerable
+					}
+					effect = {
+						set_global_flag = kaiser_portrait_defined
+						save_global_event_target_as = gigakaiserportrait
+					}
+				}
+			}
+			create_leader = { # TODO BACKGROUND
+				traits = {
+					trait = trait_ruler_charismatic
+					trait = trait_kaiser_cattail
+					trait = trait_ruler_warlike
+				}
+				class = commander
+				species = event_target:gigakaiserportrait
+				gender = male
+				skill = 10
+				set_age = 189
+				name = "Kattail"
+				immortal = yes
+				effect = {
+					save_event_target_as = giga_eaw_un_ruler
+				}
+			}
+			set_graphical_culture = avian_01
+			set_leader = event_target:giga_eaw_un_ruler
+			country_add_ethic = ethic_xenophile
+			country_add_ethic = ethic_fanatic_militarist
+			change_government = {
+				remove_invalid_civics = yes
+				authority = auth_dictatorial
+				civics = {
+					civic = civic_nationalistic_zeal
+					civic = civic_citizen_service
+				}
+			}
+			set_origin = origin_default
+			change_country_flag = {
+				icon = {
+					category="domination"
+					file="domination_8.dds"
+				}
+				background = {
+					category="backgrounds"
+					file="v.dds"
+				}
+				colors = {
+					"blue"
+					"indigo"
+					"null"
+					"null"
+				}
+			}
+			event_target:giga_eawaf_system = {
+				random_system_planet = {
+					limit = { has_planet_flag = giga_eawaf_moon }
+					save_event_target_as = giga_eawaf_moon
+				}
+				spawn_megastructure = {
+					type = kaiser_moon_1
+					planet = event_target:giga_eawaf_moon
+					owner = event_target:giga_eawaf_country
+				}
+				random_system_megastructure = {
+					upgrade_megastructure_to = kaiser_moon_2
+				}
+			}
+			set_name = "Katzenartig Imperium"
+			event_target:giga_eawaf_planet = {
+				while = { count = 12	create_army = { name = "Katzenarmee"	owner = event_target:giga_eawaf_country species = event_target:eawaf_griffons  type = "eaw_early_army" } }
+			}
+			create_leader = {
+				class = commander
+				species = event_target:eawaf_griffons
+				name = "Grover II"
+				skill = 5
+				gender = male
+				immortal = yes
+				traits = { trait = leader_trait_aggressive }
+				effect = { save_event_target_as = eaw_admiral }
+			}
+			set_male_ruler_title = "Kaiser"
+			set_female_ruler_title = "Kaiserin"
+			create_fleet = { #Spawn a fleet
+				name = "Katzenflotte"
+				settings = { uses_naval_capacity = no }
+				effect = {
+					set_owner = event_target:giga_eawaf_country
+					while = {
+						count = 80
+						create_ship = {
+							name = random
+							design = "Griffonia"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					while = {
+						count = 40
+						create_ship = {
+							name = random
+							design = "Zebrica"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					assign_leader = event_target:eaw_admiral
+					set_location = {
+						target = event_target:giga_eawaf_planet
+						distance = 15
+						angle = random
+					}
+				}
+			}
+		}
+
+		#EaW UN
+		if = {
+			limit = { has_country_flag = giga_eaw_un_unifier }
+			set_graphical_culture = reptilian_01
+			create_leader = {
+				class = official
+				species = event_target:eawaf_ponies
+				gender = male
+				set_age = 37
+				name = "Jungle Trek 3"
+				effect = {
+					save_event_target_as = giga_eaw_un_ruler
+				}
+			}
+			set_leader = event_target:giga_eaw_un_ruler
+			country_add_ethic = ethic_egalitarian
+			country_add_ethic = ethic_spiritualist
+			country_add_ethic = ethic_fanatic_xenophile
+			country_add_ethic = ethic_ecocentric
+			change_government = {
+				remove_invalid_civics = yes
+				authority = auth_oligarchic
+				civics = {
+					civic = civic_free_haven
+					civic = civic_environmentalist
+					civic = civic_idealistic_foundation
+				}
+			}
+			set_origin = origin_default
+			change_country_flag = {
+				icon={
+					category="flusionian"
+					file="eawaf_faust_flag.dds"
+				}
+				background={
+					category="backgrounds"
+					file="circle.dds"
+				}
+				colors={
+					"blue"
+					"dark_teal"
+					"null"
+					"null"
+				}
+			}
+			set_male_ruler_title = "President"
+			set_female_ruler_title = "President"
+			set_name = "Grand Faustian Convocation"
+			event_target:giga_eawaf_planet = {
+				while = { count = 6	create_army = { name = NAME_faust_guard	owner = event_target:giga_eawaf_country species = event_target:eawaf_ponies  type = "eaw_early_army" } }
+			}
+			create_leader = {
+				class = commander
+				species = event_target:eawaf_ponies
+				name = "Blueblood the 5th"
+				skill = 2
+				gender = male
+				traits = {
+					trait = leader_trait_adaptable 
+				}
+				effect = { save_event_target_as = eaw_admiral }
+			}
+			create_fleet = { #Spawn a fleet
+				name = "1st Faust Fleet"
+				settings = { uses_naval_capacity = no }
+				effect = {
+					set_owner = event_target:giga_eawaf_country
+					while = {
+						count = 8
+						create_ship = {
+							name = random
+							design = "Griffonia"
+							prefix = no
+							graphical_culture = reptilian_01
+						}
+					}
+					while = {
+						count = 36
+						create_ship = {
+							name = random
+							design = "Zebrica"
+							prefix = no
+							graphical_culture = reptilian_01
+						}
+					}
+					assign_leader = event_target:eaw_admiral
+					set_location = {
+						target = event_target:giga_eawaf_planet
+						distance = 15
+						angle = random
+					}
+				}
+			}
+			create_leader = {
+				class = commander
+				species = event_target:eawaf_ponies
+				name = "Ironside the 4th"
+				skill = 3
+				gender = male
+				traits = {
+					trait = leader_trait_engineer
+				}
+				effect = { save_event_target_as = eaw_admiral }
+			}
+			create_fleet = { #Spawn a fleet
+				name = "2nd Faust Fleet"
+				settings = { uses_naval_capacity = no }
+				effect = {
+					set_owner = event_target:giga_eawaf_country
+					while = {
+						count = 8
+						create_ship = {
+							name = random
+							design = "Griffonia"
+							prefix = no
+							graphical_culture = reptilian_01
+						}
+					}
+					while = {
+						count = 36
+						create_ship = {
+							name = random
+							design = "Zebrica"
+							prefix = no
+							graphical_culture = reptilian_01
+						}
+					}
+					assign_leader = event_target:eaw_admiral
+					set_location = {
+						target = event_target:giga_eawaf_planet
+						distance = 10
+						angle = random
+					}
+				}
+			}
+		}
+
+		#Griff Empire
+		if = {
+			limit = { has_country_flag = giga_eaw_griffon_unifier }
+			set_graphical_culture = avian_01
+			create_leader = {
+				class = official
+				species = event_target:eawaf_griffons
+				gender = male
+				set_age = 56
+				name = "Grover XI"
+				effect = {
+					save_event_target_as = giga_eaw_un_ruler
+				}
+			}
+			set_leader = event_target:giga_eaw_un_ruler
+			country_add_ethic = ethic_fanatic_authoritarian
+			country_add_ethic = ethic_spiritualist
+			country_add_ethic = ethic_fanatic_militarist
+			change_government = {
+				remove_invalid_civics = yes
+				authority = auth_imperial
+				civics = {
+					civic = civic_bugged_ordered_stratocracy
+					civic = civic_bugged_naval_traditions
+					civic = civic_heroic_tales
+				}
+			}
+			set_origin = origin_default
+			change_country_flag = {
+				icon={
+					category="flusionian"
+					file="griffon_flag.dds"
+				}
+				background={
+					category="backgrounds"
+					file="griffon.dds"
+				}
+				colors={
+					"orange"
+					"yellow"
+					"null"
+					"null"
+				}
+			}
+			set_male_ruler_title = "Kaiser"
+			set_female_ruler_title = "Kaiserin"
+			set_name = "Griffonian Empire"
+			event_target:giga_eawaf_planet = {
+				while = { count = 12	create_army = { name = NAME_reicsharmee_army	owner = event_target:giga_eawaf_country species = event_target:eawaf_griffons  type = "eaw_early_army" } }
+			}
+			create_leader = {
+				class = commander
+				species = event_target:eawaf_griffons
+				name = "Dawnclaw III"
+				skill = 3
+				gender = male
+				traits = { trait = leader_trait_aggressive }
+				effect = { save_event_target_as = eaw_admiral }
+			}
+			create_fleet = { #Spawn a fleet
+				name = "Task Force Grover"
+				settings = { uses_naval_capacity = no }
+				effect = {
+					set_owner = event_target:giga_eawaf_country
+					while = {
+						count = 32
+						create_ship = {
+							name = random
+							design = "Griffonia"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					while = {
+						count = 92
+						create_ship = {
+							name = random
+							design = "Zebrica"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					assign_leader = event_target:eaw_admiral
+					set_location = {
+						target = event_target:giga_eawaf_planet
+						distance = 15
+						angle = random
+					}
+				}
+			}
+		}
+
+		#Skynavia Socialists
+		if = {
+			limit = { has_country_flag = giga_eaw_communist_unifier }
+			set_graphical_culture = mammalian_01
+			create_leader = {
+				class = official
+				species = event_target:eawaf_griffons
+				gender = male
+				set_age = 261
+				immortal = yes
+				name = "Asper Sickleclaw"
+				effect = {
+					save_event_target_as = giga_eaw_un_ruler
+				}
+			}
+			set_leader = event_target:giga_eaw_un_ruler
+			country_add_ethic = ethic_egalitarian
+			country_add_ethic = ethic_militarist
+			country_add_ethic = ethic_fanatic_cooperative
+			country_add_ethic = ethic_pluralist
+			change_government = {
+				remove_invalid_civics = yes
+				authority = auth_democratic
+				civics = {
+					civic = civic_shared_burden
+					civic = civic_idealistic_foundation
+					civic = civic_bugged_distributism
+				}
+			}
+			set_origin = origin_default
+			change_country_flag = {
+				icon={
+					category="flusionian"
+					file="eawsocialist_flag.dds"
+				}
+				background={
+					category="backgrounds"
+					file="circle.dds"
+				}
+				colors={
+					"red"
+					"red"
+					"null"
+					"null"
+				}
+			}
+			set_male_ruler_title = "Supreme Soviet"
+			set_female_ruler_title = "Supreme Soviet"
+			set_name = "Faustwide Socialist Republic"
+			event_target:giga_eawaf_planet = {
+				while = { count = 9	create_army = { name = NAME_faust_pdf	owner = event_target:giga_eawaf_country species = event_target:eawaf_griffons  type = "eaw_early_army" } }
+			}
+			create_leader = {
+				class = commander
+				species = event_target:eawaf_griffons
+				name = "Nova Sickleclaw"
+				skill = 3
+				set_age = 54
+				gender = female
+				traits = {
+					trait = leader_trait_cautious 
+				}
+				effect = { save_event_target_as = eaw_admiral }
+			}
+			create_fleet = { #Spawn a fleet
+				name = "Liberation Flotilla"
+				settings = { uses_naval_capacity = no }
+				effect = {
+					set_owner = event_target:giga_eawaf_country
+					while = {
+						count = 24
+						create_ship = {
+							name = random
+							design = "Griffonia"
+							prefix = no
+							graphical_culture = mammalian_01
+						}
+					}
+					while = {
+						count = 80
+						create_ship = {
+							name = random
+							design = "Zebrica"
+							prefix = no
+							graphical_culture = mammalian_01
+						}
+					}
+					assign_leader = event_target:eaw_admiral
+					set_location = {
+						target = event_target:giga_eawaf_planet
+						distance = 15
+						angle = random
+					}
+				}
+			}
+		}
+
+		#Posada Socialists
+		if = {
+			limit = { has_country_flag = giga_eaw_posada_unifier }
+			set_graphical_culture = mammalian_01
+			create_leader = {
+				class = official
+				species = event_target:eawaf_ponies
+				gender = female
+				set_age = 261
+				immortal = yes
+				name = "Posada"
+				effect = {
+					save_event_target_as = giga_eaw_un_ruler
+				}
+			}
+			set_leader = event_target:giga_eaw_un_ruler
+			country_add_ethic = ethic_egalitarian
+			country_add_ethic = ethic_pluralist
+			country_add_ethic = ethic_materialist
+			country_add_ethic = ethic_fanatic_cooperative
+			change_government = {
+				remove_invalid_civics = yes
+				authority = auth_democratic
+				civics = {
+					civic = civic_technocracy
+					civic = civic_shared_burden
+					civic = civic_functional_architecture
+				}
+			}
+			set_origin = origin_default
+			change_country_flag = {
+				icon={
+					category="flusionian"
+					file="eawaf_posada_flag.dds"
+				}
+				background={
+					category="backgrounds"
+					file="posada.dds"
+				}
+				colors={
+					"light_grey"
+					"shadow_blue"
+					"null"
+					"null"
+				}
+			}
+			set_male_ruler_title = "Supreme Soviet"
+			set_female_ruler_title = "Supreme Soviet"
+			set_name = "Revolutionary Faust"
+			event_target:giga_eawaf_planet = {
+				while = { count = 9	create_army = { name = NAME_faust_pdf	owner = event_target:giga_eawaf_country species = event_target:eawaf_griffons  type = "eaw_early_army" } }
+			}
+			create_leader = {
+				class = commander
+				species = event_target:eawaf_griffons
+				name = "Nova Sickleclaw"
+				skill = 3
+				set_age = 54
+				gender = female
+				traits = {
+					trait = leader_trait_cautious 
+				}
+				effect = { save_event_target_as = eaw_admiral }
+			}
+			create_fleet = { #Spawn a fleet
+				name = "Liberation Flotilla"
+				settings = { uses_naval_capacity = no }
+				effect = {
+					set_owner = event_target:giga_eawaf_country
+					while = {
+						count = 24
+						create_ship = {
+							name = random
+							design = "Griffonia"
+							prefix = no
+							graphical_culture = mammalian_01
+						}
+					}
+					while = {
+						count = 80
+						create_ship = {
+							name = random
+							design = "Zebrica"
+							prefix = no
+							graphical_culture = mammalian_01
+						}
+					}
+					assign_leader = event_target:eaw_admiral
+					set_location = {
+						target = event_target:giga_eawaf_planet
+						distance = 15
+						angle = random
+					}
+				}
+			}
+		}
+
+		#Riverfed UN
+		if = {
+			limit = { has_country_flag = giga_eaw_river_unifier }
+			set_graphical_culture = reptilian_01
+			create_leader = {
+				class = official
+				species = event_target:eawaf_ponies
+				gender = male
+				set_age = 37
+				name = "River Swirl III"
+				effect = {
+					save_event_target_as = giga_eaw_un_ruler
+				}
+			}
+			set_leader = event_target:giga_eaw_un_ruler
+			country_add_ethic = ethic_egalitarian
+			country_add_ethic = ethic_xenophile
+			country_add_ethic = ethic_fanatic_elitist
+			country_add_ethic = ethic_pacifist
+			change_government = {
+				remove_invalid_civics = yes
+				authority = auth_oligarchic
+				civics = {
+					civic = civic_free_haven
+					civic = civic_shadow_council
+					civic = civic_bugged_patrician_court
+				}
+			}
+			set_origin = origin_default
+			change_country_flag = {
+				icon={
+					category="flusionian"
+					file="eawaf_riverfed_flag.dds"
+				}
+				background={
+					category="backgrounds"
+					file="flag_BG_31.dds"
+				}
+				colors={
+					"dark_teal"
+					"blue"
+					"null"
+					"null"
+				}
+			}
+			set_male_ruler_title = "President"
+			set_female_ruler_title = "President"
+			set_name = "Faustian Federation"
+			event_target:giga_eawaf_planet = {
+				while = { count = 6	create_army = { name = NAME_faust_guard	owner = event_target:giga_eawaf_country species = event_target:eawaf_ponies  type = "eaw_early_army" } }
+			}
+			create_leader = {
+				class = commander
+				species = event_target:eawaf_ponies
+				name = "Arclight"
+				skill = 2
+				gender = male
+				traits = {
+					trait = leader_trait_adaptable 
+				}
+				effect = { save_event_target_as = eaw_admiral }
+			}
+			create_fleet = { #Spawn a fleet
+				name = "1st Faust Fleet"
+				settings = { uses_naval_capacity = no }
+				effect = {
+					set_owner = event_target:giga_eawaf_country
+					while = {
+						count = 8
+						create_ship = {
+							name = random
+							design = "Griffonia"
+							prefix = no
+							graphical_culture = reptilian_01
+						}
+					}
+					while = {
+						count = 36
+						create_ship = {
+							name = random
+							design = "Zebrica"
+							prefix = no
+							graphical_culture = reptilian_01
+						}
+					}
+					assign_leader = event_target:eaw_admiral
+					set_location = {
+						target = event_target:giga_eawaf_planet
+						distance = 15
+						angle = random
+					}
+				}
+			}
+			create_leader = {
+				class = commander
+				species = event_target:eawaf_ponies
+				name = "Ironside the 4th"
+				skill = 3
+				gender = male
+				traits = {
+					trait = leader_trait_engineer
+				}
+				effect = { save_event_target_as = eaw_admiral }
+			}
+			create_fleet = { #Spawn a fleet
+				name = "2nd Faust Fleet"
+				settings = { uses_naval_capacity = no }
+				effect = {
+					set_owner = event_target:giga_eawaf_country
+					while = {
+						count = 8
+						create_ship = {
+							name = random
+							design = "Griffonia"
+							prefix = no
+							graphical_culture = reptilian_01
+						}
+					}
+					while = {
+						count = 36
+						create_ship = {
+							name = random
+							design = "Zebrica"
+							prefix = no
+							graphical_culture = reptilian_01
+						}
+					}
+					assign_leader = event_target:eaw_admiral
+					set_location = {
+						target = event_target:giga_eawaf_planet
+						distance = 10
+						angle = random
+					}
+				}
+			}
+		}
+
+		#JER-WNG Empire
+		if = {
+			limit = { has_country_flag = giga_eaw_wingaqui_unifier }
+			set_graphical_culture = avian_01
+			create_leader = {
+				class = official
+				species = event_target:eawaf_griffons
+				gender = male
+				set_age = 56
+				name = "Alessandra Discret"
+				effect = {
+					save_event_target_as = giga_eaw_un_ruler
+				}
+			}
+			set_leader = event_target:giga_eaw_un_ruler
+			country_add_ethic = ethic_authoritarian
+			country_add_ethic = ethic_fanatic_materialist
+			country_add_ethic = ethic_militarist
+			country_add_ethic = ethic_elitist
+			change_government = {
+				remove_invalid_civics = yes
+				authority = auth_dictatorial
+				civics = {
+					civic = civic_aristocratic_elite
+					civic = civic_nationalistic_zeal
+					civic = civic_distinguished_admiralty
+				}
+			}
+			set_origin = origin_default
+			change_country_flag = {
+				icon={
+					category="flusionian"
+					file="eawaf_jerwng_flag.dds"
+				}
+				background={
+					category="backgrounds"
+					file="triangle_split.dds"
+				}
+				colors={
+					"light_indigo"
+					"blue"
+					"null"
+					"null"
+				}
+			}
+			set_male_ruler_title = "Emperor"
+			set_female_ruler_title = "Empress"
+			set_name = "Grand Empire of Aquileia-Wingbardy"
+			event_target:giga_eawaf_planet = {
+				while = { count = 12	create_army = { name = "Imperial Legions"	owner = event_target:giga_eawaf_country species = event_target:eawaf_griffons  type = "eaw_early_army" } }
+			}
+			create_leader = {
+				class = commander
+				species = event_target:eawaf_griffons
+				name = "Beakolini III"
+				skill = 3
+				gender = male
+				traits = { trait = leader_trait_aggressive }
+				effect = { save_event_target_as = eaw_admiral }
+			}
+			create_fleet = { #Spawn a fleet
+				name = "Task Force Aquila"
+				settings = { uses_naval_capacity = no }
+				effect = {
+					set_owner = event_target:giga_eawaf_country
+					while = {
+						count = 24
+						create_ship = {
+							name = random
+							design = "Griffonia"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					while = {
+						count = 60
+						create_ship = {
+							name = random
+							design = "Zebrica"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					assign_leader = event_target:eaw_admiral
+					set_location = {
+						target = event_target:giga_eawaf_planet
+						distance = 15
+						angle = random
+					}
+				}
+			}
+			create_fleet = { #Spawn a fleet
+				name = "Task Force Karthin"
+				settings = { uses_naval_capacity = no }
+				effect = {
+					set_owner = event_target:giga_eawaf_country
+					while = {
+						count = 24
+						create_ship = {
+							name = random
+							design = "Griffonia"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					while = {
+						count = 60
+						create_ship = {
+							name = random
+							design = "Zebrica"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					assign_leader = event_target:eaw_admiral
+					set_location = {
+						target = event_target:giga_eawaf_planet
+						distance = 15
+						angle = random
+					}
+				}
+			}
+		}
+
+		#Fickle
+		if = {
+			limit = { has_country_flag = giga_eaw_kiria_unifier }
+			set_graphical_culture = avian_01
+			create_leader = {
+				class = official
+				species = event_target:eawaf_griffons
+				gender = male
+				set_age = 56
+				name = "Fickle Voltage"
+				effect = {
+					save_event_target_as = giga_eaw_un_ruler
+				}
+			}
+			set_leader = event_target:giga_eaw_un_ruler
+			country_add_ethic = ethic_authoritarian
+			country_add_ethic = ethic_anthropocentric
+			country_add_ethic = ethic_fanatic_xenophile
+			country_add_ethic = ethic_competitive
+			change_government = {
+				remove_invalid_civics = yes
+				authority = auth_corporate
+				civics = {
+					civic = civic_bugged_interplanetary_mining_corpo
+					civic = civic_corporate_relentless_industrialists
+					civic = civic_corporate_crafters
+				}
+			}
+			set_origin = origin_default
+			change_country_flag = {
+				icon={
+					category="flusionian"
+					file="eawaf_kiria_flag.dds"
+				}
+				background={
+					category="backgrounds"
+					file="circle.dds"
+				}
+				colors={
+					"blue"
+					"dark_blue"
+					"null"
+					"null"
+				}
+			}
+			set_male_ruler_title = "Director"
+			set_female_ruler_title = "Director"
+			set_name = "Faustian Corporation"
+			event_target:giga_eawaf_planet = {
+				while = { count = 12	create_army = { name = "Kirin Protectors"	owner = event_target:giga_eawaf_country species = event_target:eawaf_griffons  type = "eaw_early_army" } }
+			}
+			create_leader = {
+				class = commander
+				species = event_target:eawaf_griffons
+				name = "Summer Blaze"
+				skill = 3
+				gender = male
+				traits = { trait = leader_trait_aggressive }
+				effect = { save_event_target_as = eaw_admiral }
+			}
+			create_fleet = { #Spawn a fleet
+				name = "Rapid Delivery Service"
+				settings = { uses_naval_capacity = no }
+				effect = {
+					set_owner = event_target:giga_eawaf_country
+					while = {
+						count = 32
+						create_ship = {
+							name = random
+							design = "Griffonia"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					while = {
+						count = 92
+						create_ship = {
+							name = random
+							design = "Zebrica"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					assign_leader = event_target:eaw_admiral
+					set_location = {
+						target = event_target:giga_eawaf_planet
+						distance = 15
+						angle = random
+					}
+				}
+			}
+		}
+
+		#Dread League
+		if = {
+			limit = { has_country_flag = giga_eaw_dread_unifier }
+			set_graphical_culture = avian_01
+			create_leader = {
+				class = official
+				species = event_target:eawaf_ponies
+				gender = female
+				immortal = yes
+				set_age = 56
+				name = "Rosa Maledicta"
+				effect = {
+					save_event_target_as = giga_eaw_un_ruler
+				}
+			}
+			set_leader = event_target:giga_eaw_un_ruler
+			country_add_ethic = ethic_gestalt_consciousness
+			country_add_ethic = ethic_foci_encroachment
+			country_add_ethic = ethic_form_impassive
+			country_add_ethic = ethic_form_introspective
+			country_add_ethic = ethic_form_convergent
+			change_government = {
+				remove_invalid_civics = yes
+				authority = auth_hive_mind
+				civics = {
+					civic = civic_hive_devouring_swarm
+					civic = civic_hive_cordyceptic_drones
+					civic = civic_hive_strength_of_legions
+				}
+			}
+			set_origin = origin_default
+			change_country_flag = {
+				icon={
+					category="flusionian"
+					file="eawaf_dread_flag.dds"
+				}
+				background={
+					category="backgrounds"
+					file="circle.dds"
+				}
+				colors={
+					"black"
+					"black"
+					"null"
+					"null"
+				}
+			}
+			set_male_ruler_title = "King of Bones"
+			set_female_ruler_title = "Queen of Bones"
+			set_name = "Dread Scourge"
+			event_target:giga_eawaf_planet = {
+				while = { count = 12	create_army = { name = "Undead Hordes"	owner = event_target:giga_eawaf_country species = event_target:eawaf_griffons  type = "eaw_early_army" } }
+				every_owned_pop = {
+					modify_species = {
+						species = this
+						add_trait = trait_hive_mind
+					}
+				}
+			}
+			create_leader = {
+				class = commander
+				species = event_target:eawaf_ponies
+				name = "Skellymare"
+				skill = 8
+				gender = male
+				traits = { trait = leader_trait_aggressive }
+				effect = { save_event_target_as = eaw_admiral }
+			}
+			create_fleet = { #Spawn a fleet
+				name = "Deathenders"
+				settings = { uses_naval_capacity = no }
+				effect = {
+					set_owner = event_target:giga_eawaf_country
+					while = {
+						count = 54
+						create_ship = {
+							name = random
+							design = "Griffonia"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					while = {
+						count = 144
+						create_ship = {
+							name = random
+							design = "Zebrica"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					assign_leader = event_target:eaw_admiral
+					set_location = {
+						target = event_target:giga_eawaf_planet
+						distance = 15
+						angle = random
+					}
+				}
+			}
+		}
+
+		#Leopold
+		if = {
+			limit = { has_country_flag = giga_eaw_leopold_unifier }
+			set_graphical_culture = avian_01
+			create_leader = {
+				class = official
+				species = event_target:eawaf_ponies
+				gender = male
+				set_age = 56
+				name = "Leopold Schmeller"
+				effect = {
+					save_event_target_as = giga_eaw_un_ruler
+				}
+			}
+			set_leader = event_target:giga_eaw_un_ruler
+			country_add_ethic = ethic_gestalt_consciousness
+			change_government = {
+				remove_invalid_civics = yes
+				authority = auth_machine_intelligence
+				civics = {
+					civic = civic_machine_assimilator
+					civic = civic_machine_warbots
+				}
+			}
+			set_origin = origin_default
+			change_country_flag = {
+				icon={
+					category="blocky"
+					file="flag_blocky_4.dds"
+				}
+				background={
+					category="backgrounds"
+					file="flag_BG_54.dds"
+				}
+				colors={
+					"intense_orange"
+					"light_orange"
+					"null"
+					"null"
+				}
+			}
+			set_male_ruler_title = "Machine Lord"
+			set_female_ruler_title = "Machine Lord"
+			set_name = "Faustian Directory"
+			event_target:giga_eawaf_planet = {
+				while = { count = 12	create_army = { name = "Clockwork Legions"	owner = event_target:giga_eawaf_country species = event_target:eawaf_griffons  type = "eaw_early_army" } }
+				every_owned_pop = {
+					modify_species = {
+						species = this
+						add_trait = trait_cyborg
+					}
+				}
+			}
+			create_leader = {
+				class = commander
+				species = event_target:eawaf_griffons
+				name = "Assault Unit"
+				skill = 3
+				gender = male
+				traits = { trait = leader_trait_aggressive }
+				effect = { save_event_target_as = eaw_admiral }
+			}
+			create_fleet = { #Spawn a fleet
+				name = "Assault Force"
+				settings = { uses_naval_capacity = no }
+				effect = {
+					set_owner = event_target:giga_eawaf_country
+					while = {
+						count = 8
+						create_ship = {
+							name = random
+							design = "Griffonia"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					while = {
+						count = 24
+						create_ship = {
+							name = random
+							design = "Zebrica"
+							prefix = no
+							graphical_culture = avian_01
+						}
+					}
+					assign_leader = event_target:eaw_admiral
+					set_location = {
+						target = event_target:giga_eawaf_planet
+						distance = 15
+						angle = random
+					}
+				}
+			}
+		}
+
+		add_modifier = {
+			modifier = katzenartig_major_splinter
+			days = -1
+		}
+
+		event_target:giga_eawaf_system = {
+			if = {
+				limit = { exists = space_owner }
+				space_owner = {
+					establish_communications_no_message = event_target:giga_eawaf_country
+					country_event = { id = giga_eawaf.7011 days = 1 }
+				}
+			}
+			if = {
+				limit = { exists = starbase }
+				starbase = { 
+					set_owner = event_target:giga_eawaf_country 
+				}
+			}
+			else = {
+				create_starbase = {
+					size = starbase_starport
+					owner = event_target:giga_eawaf_country
+				}
+			}
+		}
+	}
+}

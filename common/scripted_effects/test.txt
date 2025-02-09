@@ -1,0 +1,10 @@
+# test_effect = {
+# 	ruler = {
+# 		set_name = {
+# 			key = "test_name"
+# 			variable_string = ""} set_variable = { which = test value = 10 }""
+# 		}
+#
+# 	# ruler = { set_variable = { which = test value = "[this.GetName]"} set_variable = { which = test value = 10 }""}
+# 	# }
+# }
