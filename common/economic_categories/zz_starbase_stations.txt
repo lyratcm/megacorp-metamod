@@ -1,0 +1,84 @@
+starbase_stations = {
+    parent = starbases
+    modifier_category = starbase
+    generate_add_modifiers = {
+        produces
+        cost
+        upkeep
+    }
+    generate_mult_modifiers = {
+        produces
+        cost
+        upkeep
+    }
+    triggered_cost_modifier = {
+        key = starbase_outpost
+        use_parent_icon = yes
+        modifier_types = {
+            mult
+            add
+        }
+        trigger = {
+            is_scope_valid = yes
+            OR = {
+                is_ship_size = starbase_outpost
+                is_ship_size = orbital_ring_tier_1
+            }
+        }
+    }
+    triggered_cost_modifier = {
+        key = starbase_starport
+        modifier_types = {
+            mult
+            add
+        }
+        trigger = {
+            is_scope_valid = yes
+            is_ship_size = starbase_starport
+        }
+    }
+    triggered_cost_modifier = {
+        key = starbase_starhold
+        modifier_types = {
+            mult
+            add
+        }
+        trigger = {
+            is_scope_valid = yes
+            is_ship_size = starbase_starhold
+        }
+    }
+    triggered_cost_modifier = {
+        key = starbase_starfortress
+        modifier_types = {
+            mult
+            add
+        }
+        trigger = {
+            is_scope_valid = yes
+            is_ship_size = starbase_starfortress
+        }
+    }
+    triggered_cost_modifier = {
+        key = starbase_citadel
+        modifier_types = {
+            mult
+            add
+        }
+        trigger = {
+            is_scope_valid = yes
+            is_ship_size = starbase_citadel
+        }
+    }
+    triggered_cost_modifier = {
+        key = ion_cannon
+        modifier_types = {
+            mult
+            add
+        }
+        trigger = {
+            is_scope_valid = yes
+            is_ship_size = ion_cannon
+        }
+    }
+}

@@ -1,0 +1,10 @@
+pop_category_purge = {
+    parent = planet_pops
+    generate_mult_modifiers = {
+        produces
+    }
+    modifier_category = pop
+    generate_add_modifiers = {
+        produces
+    }
+}

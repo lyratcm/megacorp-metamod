@@ -1,0 +1,15 @@
+default = {
+    ship_of_size_limits = {
+        explorationship_ship_limit
+        Flagship_ship_limit
+        seele_ships_limit
+        ds_nomads_main_ships_limit
+        ds_nomads_ark_ships_limit
+        ds_nomads_shipyard_ships_limit
+        ds_deathstar_ships_limit
+        ds_endzeit_ships_limit
+        ds_will_ships_limit
+        ds_eldritch_reincarnation_ships_limit
+        ds_gray_tempest_titan_limit
+    }
+}

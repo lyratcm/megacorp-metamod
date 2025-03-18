@@ -1,0 +1,94 @@
+planet_pops = {
+    parent = planets
+    generate_add_modifiers = {
+        upkeep
+    }
+    generate_mult_modifiers = {
+        upkeep
+    }
+    modifier_category = pop
+    triggered_upkeep_modifier = {
+        key = planet_pops_robotics
+        modifier_types = {
+            mult
+            add
+        }
+        trigger = {
+            is_robot_pop = yes
+        }
+    }
+    triggered_upkeep_modifier = {
+        key = planet_pops_cyborgs
+        modifier_types = {
+            mult
+            add
+        }
+        trigger = {
+            has_trait = trait_cybernetic
+        }
+    }
+    triggered_upkeep_modifier = {
+        key = planet_pops_organics
+        modifier_types = {
+            mult
+            add
+        }
+        trigger = {
+            is_robot_pop = no
+        }
+    }
+    triggered_upkeep_modifier = {
+        key = planet_pops_unemployed
+        modifier_types = {
+            mult
+            add
+        }
+        trigger = {
+            is_unemployed = yes
+        }
+    }
+    triggered_upkeep_modifier = {
+        key = planet_pops_biologicals
+        modifier_types = {
+            mult
+            add
+        }
+        trigger = {
+            is_lithoid = no
+            is_robot_pop = no
+        }
+    }
+    triggered_upkeep_modifier = {
+        key = planet_pops_lithoids
+        modifier_types = {
+            mult
+            add
+        }
+        trigger = {
+            is_lithoid = yes
+            is_robot_pop = no
+        }
+    }
+    triggered_upkeep_modifier = {
+        key = planet_pops_psionics
+        modifier_types = {
+            add
+            mult
+        }
+        trigger = {
+            OR = {
+                has_trait = trait_psionic
+                has_trait = trait_latent_psionic
+            }
+        }
+    }
+    triggered_upkeep_modifier = {
+        key = planet_pops_psionic_entities
+        modifier_types = {
+            add
+        }
+        trigger = {
+            has_trait = ag_trait_psionic_entity
+        }
+    }
+}

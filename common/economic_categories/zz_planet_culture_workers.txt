@@ -1,0 +1,12 @@
+planet_culture_workers = {
+    parent = planet_administrators
+    modifier_category = pop
+    generate_mult_modifiers = {
+        produces
+        upkeep
+    }
+    generate_add_modifiers = {
+        produces
+        upkeep
+    }
+}

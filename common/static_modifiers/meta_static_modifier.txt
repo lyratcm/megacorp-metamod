@@ -5,3 +5,8 @@ meta_empire_size_pops_mult = {
 meta_starbases_upkeep_mult = {
 	starbases_upkeep_mult = -1
 }
+
+meta_megastructure_cap = {
+	icon = "gfx/interface/icons/modifiers/mod_megastructures_cost_add.dds"
+	country_mega_cap = 1
+}

@@ -52,56 +52,76 @@ country_event = {
 					exists = event_target:ctf_target
 				}
 			}
-			random_galaxy_planet = {
+			if = {
 				limit = {
+					any_galaxy_planet = {
+						is_star = yes
+						is_star_class = sc_birch
+					}
+				}
+				random_galaxy_planet = {
+					limit = {
+						is_star = yes
+						is_star_class = sc_birch
+					}
+					set_planet_flag = ctf_planet
+					set_global_flag = ctf_set
+					save_global_event_target_as = ctf_target
+				}
+			}
+
+		}
+		if = {
+			limit = {
+				#don't run unless the birch is spawned yet
+				exists = event_target:ctf_target
+				event_target:ctf_target = {
 					is_star = yes
 					is_star_class = sc_birch
 				}
-				set_planet_flag = ctf_planet
-				set_global_flag = ctf_set
-				save_global_event_target_as = ctf_target
 			}
-		}
-		event_target:ctf_target = {
-			if = {
-				limit = {
-					solar_system = {
-						exists = owner
-						owner = {
-							is_ai = no
-						}
-					}
-					not = {
+			event_target:ctf_target = {
+				if = {
+					limit = {
 						solar_system = {
-							any_system_planet = {
-								owner = {
-									not = {
-										is_same_empire = prevprev.owner
+							exists = owner
+							owner = {
+								is_ai = no
+							}
+						}
+						not = {
+							solar_system = {
+								any_system_planet = {
+									owner = {
+										not = {
+											is_same_empire = prevprev.owner
+										}
 									}
 								}
 							}
 						}
 					}
-				}
-				solar_system.owner = {
-					save_global_event_target_as = ctf_bonus_country
-					add_modifier = {
-						modifier = bounty_unity_bonus
-						mult = value:bounty_unity_scale
-					}
-				}
-			}
-			else_if = {
-				limit = {
-					solar_system = {
-						exists = owner
-						owner = {
-							is_ai = no
+					solar_system.owner = {
+						save_global_event_target_as = ctf_bonus_country
+						add_modifier = {
+							modifier = bounty_unity_bonus
+							mult = value:bounty_unity_scale
 						}
 					}
 				}
-				log_error = "not able to give bounty"
+				else_if = {
+					limit = {
+						solar_system = {
+							exists = owner
+							owner = {
+								is_ai = no
+							}
+						}
+					}
+					log_error = "not able to give bounty"
+				}
 			}
 		}
+
 	}
 }

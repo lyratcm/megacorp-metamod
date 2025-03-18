@@ -1,0 +1,12 @@
+planet_chemists = {
+    parent = planet_jobs_productive
+    modifier_category = pop
+    generate_mult_modifiers = {
+        produces
+        upkeep
+    }
+    generate_add_modifiers = {
+        produces
+        upkeep
+    }
+}

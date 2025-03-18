@@ -241,7 +241,7 @@ country_event = {
 
 	immediate = {
 		# size from pop limit
-		set_variable = { which = meta_empire_size_pops_mult_var value = modifier:empire_size_pops_mult }
+		export_modifier_to_variable = { modifier = empire_size_pops_mult variable = meta_empire_size_pops_mult_var }
 		change_variable = {
 			which = meta_empire_size_pops_mult_var
 			value = 0.85
@@ -253,7 +253,7 @@ country_event = {
 			add_modifier = { modifier = meta_empire_size_pops_mult mult = meta_empire_size_pops_mult_var days = 29 }
 		}
 		# starbase upkeep limit
-		set_variable = { which = meta_empire_size_pops_mult_var value = modifier:starbases_upkeep_mult }
+		export_modifier_to_variable = { modifier = starbases_upkeep_mult variable = meta_starbases_upkeep_mult_var }
 		change_variable = {
 			which = meta_starbases_upkeep_mult_var
 			value = 0.75
@@ -263,6 +263,26 @@ country_event = {
 				check_variable = { which = meta_starbases_upkeep_mult_var value < 0 }
 			}
 			add_modifier = { modifier = meta_starbases_upkeep_mult mult = meta_starbases_upkeep_mult_var days = 29 }
+		}
+		export_modifier_to_variable = { modifier = country_megastructure_build_cap_add variable = meta_mega_build_cap }
+		if = {
+			limit = {
+				check_modifier_value = { modifier = country_megastructure_build_cap_mult value > 0 }
+			}
+			multiply_variable = { which = meta_mega_build_cap value = modifier:country_megastructure_build_cap_mult }
+		}
+		every_owned_megastructure = {
+			limit = {
+				is_upgrading = yes
+			}
+			owner = {
+				change_variable = { which = meta_mega_build_cap value = -1 }
+			}
+		}
+		remove_modifier = meta_megastructure_cap
+		add_modifier = {
+			modifier = meta_megastructure_cap
+			mult = meta_mega_build_cap
 		}
 	}
 }

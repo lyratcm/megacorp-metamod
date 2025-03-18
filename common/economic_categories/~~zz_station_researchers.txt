@@ -1,0 +1,14 @@
+station_researchers = {
+    parent = stations
+    generate_mult_modifiers = {
+        produces
+        cost
+        upkeep
+    }
+    generate_add_modifiers = {
+        produces
+        cost
+        upkeep
+    }
+    modifier_category = deposit
+}

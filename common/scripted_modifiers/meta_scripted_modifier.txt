@@ -1,3 +1,8 @@
 country_unity_produces_mult_offset = {
 	category = country
 }
+
+country_mega_cap = {
+	category = country
+	good = yes
+}

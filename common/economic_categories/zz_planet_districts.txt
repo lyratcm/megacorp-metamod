@@ -1,0 +1,14 @@
+planet_districts = {
+    parent = planet_structures
+    generate_mult_modifiers = {
+        cost
+        upkeep
+        produces
+    }
+    generate_add_modifiers = {
+        cost
+        upkeep
+        produces
+    }
+    modifier_category = planet
+}
