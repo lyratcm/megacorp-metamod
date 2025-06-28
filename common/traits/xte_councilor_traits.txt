@@ -1,0 +1,723 @@
+#############################
+# Xenology Councilor Traits #
+#############################
+
+xte_leader_trait_valiant = {
+	inline_script = {
+		script = trait/xte_icon
+		CLASS = leader
+		ICON = GFX_xte_leader_trait_valiant
+		RARITY = xte_positive
+		COUNCIL = yes
+		TIER = none
+	}
+	cost = 0
+	randomized = no
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		defensive_war_influence_gain_add = 0.5
+		starbase_defensive_war_ship_build_speed_mult = 0.25
+		country_war_exhaustion_mult = -0.1
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_valiant|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_pertinacious = {
+	inline_script = {
+		script = trait/xte_icon
+		CLASS = leader
+		ICON = GFX_xte_leader_trait_pertinacious
+		RARITY = xte_positive
+		COUNCIL = yes
+		TIER = none
+	}
+	cost = 0
+	randomized = no
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		ship_weapon_damage = 0.1
+		damage_vs_country_type_swarm_mult = 0.33
+		damage_vs_country_type_extradimensional_mult = 0.33
+		damage_vs_country_type_extradimensional_2_mult = 0.33
+		damage_vs_country_type_extradimensional_3_mult = 0.33
+		damage_vs_country_type_ai_empire_mult = 0.33
+		damage_vs_country_type_gray_goo_mult = 0.33
+		damage_vs_player_crisis_mult = 0.33
+		pop_happiness = -0.1
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_pertinacious|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_arcanist = {
+	inline_script = {
+		script = trait/xte_icon
+		CLASS = leader
+		ICON = GFX_xte_leader_trait_arcanist
+		RARITY = xte_positive
+		COUNCIL = yes
+		TIER = none
+	}
+	cost = 0
+	randomized = no
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		country_sr_dark_matter_produces_mult = 0.33
+		country_sr_living_metal_produces_mult = 0.33
+		country_sr_zro_produces_mult = 0.33
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_arcanist|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_life_weaver = {
+	inline_script = {
+		script = trait/xte_icon
+		CLASS = leader
+		ICON = GFX_xte_leader_trait_life_weaver
+		RARITY = xte_positive
+		COUNCIL = yes
+		TIER = none
+	}
+	cost = 0
+	randomized = no
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		# 1.03 due to rounding errors
+		BIOLOGICAL_species_trait_points_add = 1.03
+		LITHOID_species_trait_points_add = 1.03
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_life_weaver|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_life_crafter = {
+	inline_script = {
+		script = trait/xte_icon
+		CLASS = leader
+		ICON = GFX_xte_leader_trait_life_crafter
+		RARITY = xte_positive
+		COUNCIL = yes
+		TIER = none
+	}
+	cost = 0
+	randomized = no
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		ROBOT_species_trait_points_add = 1.03
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_life_crafter|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_land_of_the_free = {
+	inline_script = {
+		script = trait/xte_icon
+		CLASS = leader
+		ICON = GFX_xte_leader_trait_land_of_the_free
+		RARITY = xte_positive
+		COUNCIL = yes
+		TIER = none
+	}
+	cost = 0
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		country_trade_produces_mult = 0.15				#Ever Universe: Replaced defunct modifiers (4.0)
+		pop_ethics_shift_speed_mult = 1.00
+		planet_jobs_slave_produces_mult = -0.25
+		planet_crime_mult = 0.25
+		pop_factions_produces_mult = 0.2
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_land_of_the_free|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_lawbringer = {
+	inline_script = {
+		script = trait/xte_icon
+		CLASS = leader
+		ICON = GFX_xte_leader_trait_lawbringer
+		RARITY = xte_positive
+		COUNCIL = yes
+		TIER = none
+	}
+	cost = 0
+	randomized = no
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		country_trade_produces_mult = 0.05				#Ever Universe: Replaced defunct modifiers (4.0)
+		planet_stability_add = 5
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_lawbringer|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_regal = {
+	inline_script = {
+		script = trait/xte_icon
+		CLASS = leader
+		ICON = GFX_xte_leader_trait_regal
+		RARITY = xte_positive
+		COUNCIL = yes
+		TIER = none
+	}
+	cost = 0
+	randomized = no
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		councilor_exp_gain = 0.25
+		council_agenda_progress_speed = 0.15
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_regal|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_skyborne_architect = {
+	inline_script = {
+		script = trait/xte_icon
+		CLASS = leader
+		ICON = GFX_xte_leader_trait_skyborne_architect
+		RARITY = xte_positive
+		COUNCIL = yes
+		TIER = none
+	}
+	cost = 0
+	randomized = no
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		country_megastructure_build_cap_add = 1.03
+		megastructure_build_speed_mult = 0.33
+		shipsize_titan_build_speed_mult = 0.33
+		shipsize_colossus_build_speed_mult = 0.33
+		shipsize_juggernaut_build_speed_mult = 0.33
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_skyborne_architect|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_polymath = {
+	inline_script = {
+		script = trait/xte_icon
+		CLASS = leader
+		ICON = GFX_xte_leader_trait_polymath
+		RARITY = xte_positive
+		COUNCIL = yes
+		TIER = none
+	}
+	cost = 0
+	randomized = no
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		num_tech_alternatives_add = 1.03
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_polymath|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_enlightened = {
+	inline_script = {
+		script = trait/xte_icon
+		CLASS = leader
+		ICON = GFX_xte_leader_trait_enlightened
+		RARITY = xte_positive
+		COUNCIL = yes
+		TIER = none
+	}
+	cost = 0
+	randomized = no
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		pop_factions_produces_mult = 0.5
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_enlightened|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_maladroit = {
+	inline_script = {
+		script = trait/icon_negative_no_tiers
+		ICON = GFX_xte_leader_trait_maladroit
+		COUNCIL = yes
+	}
+	cost = 0
+	randomized = no
+	leader_trait_type = negative
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		station_gatherers_volatile_motes_produces_mult = -0.2
+		station_gatherers_exotic_gases_produces_mult = -0.2
+		station_gatherers_rare_crystals_produces_mult = -0.2
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_maladroit|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_domineering = {
+	inline_script = {
+		script = trait/icon_negative_no_tiers
+		ICON = GFX_xte_leader_trait_domineering
+		COUNCIL = yes
+	}
+	cost = 1
+	leader_trait_type = negative
+	opposites = {
+		"trait_ruler_champion_of_the_people"
+		"trait_ruler_champion_of_the_people_2"
+		"xte_leader_trait_indulgent"
+		"xte_leader_trait_spineless"
+		"xte_leader_trait_hateful"
+		"xte_leader_trait_peacemonger"
+		"xte_leader_trait_warmonger"
+		"xte_leader_trait_superstitious"
+		"xte_leader_trait_cynical"
+	}
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		pop_happiness = -0.05
+		country_leader_pool_size = -1
+		pop_ethic_egalitarian_attraction_mult = 0.5
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_valiant|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_indulgent = {
+	inline_script = {
+		script = trait/icon_negative_no_tiers
+		ICON = GFX_xte_leader_trait_indulgent
+		COUNCIL = yes
+	}
+	cost = 1
+	leader_trait_type = negative
+	opposites = {
+		"xte_leader_trait_domineering"
+		"xte_leader_trait_spineless"
+		"xte_leader_trait_hateful"
+		"xte_leader_trait_peacemonger"
+		"xte_leader_trait_warmonger"
+		"xte_leader_trait_superstitious"
+		"xte_leader_trait_cynical"
+	}
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		planet_crime_add = 20
+		country_trade_produces_mult = -0.075				#Ever Universe: Replaced defunct modifiers (4.0)
+		pop_ethic_authoritarian_attraction_mult = 0.5
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_indulgent|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_spineless = {
+	inline_script = {
+		script = trait/icon_negative_no_tiers
+		ICON = GFX_xte_leader_trait_spineless
+		COUNCIL = yes
+	}
+	cost = 1
+	leader_trait_type = negative
+	opposites = {
+		"trait_ruler_expansionist"
+		"trait_ruler_expansionist_2"
+		"trait_ruler_expansionist_3"
+		"trait_ruler_deep_connections"
+		"trait_ruler_deep_connections_2"
+		"trait_ruler_deep_connections_3"
+		"xte_leader_trait_domineering"
+		"xte_leader_trait_indulgent"
+		"xte_leader_trait_hateful"
+		"xte_leader_trait_peacemonger"
+		"xte_leader_trait_warmonger"
+		"xte_leader_trait_superstitious"
+		"xte_leader_trait_cynical"
+	}
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		country_base_influence_produces_add = -1
+		country_starbase_influence_cost_mult = 0.1
+		country_claim_influence_cost_mult = 0.1
+		pop_ethic_xenophobe_attraction_mult = 0.5
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_spineless|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_hateful = {
+	inline_script = {
+		script = trait/icon_negative_no_tiers
+		ICON = GFX_xte_leader_trait_spineless
+		COUNCIL = yes
+	}
+	cost = 1
+	leader_trait_type = negative
+	opposites = {
+		"xte_leader_trait_domineering"
+		"xte_leader_trait_indulgent"
+		"xte_leader_trait_spineless"
+		"xte_leader_trait_peacemonger"
+		"xte_leader_trait_warmonger"
+		"xte_leader_trait_superstitious"
+		"xte_leader_trait_cynical"
+	}
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		country_trade_fee = 0.1
+		country_trust_growth = -0.25
+		diplomacy_upkeep_mult = 0.25
+		pop_ethic_xenophile_attraction_mult = 0.5
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_hateful|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_peacemonger = {
+	inline_script = {
+		script = trait/icon_negative_no_tiers
+		ICON = GFX_xte_leader_trait_peacemonger
+		COUNCIL = yes
+	}
+	cost = 1
+	leader_trait_type = negative
+	opposites = {
+		"trait_ruler_warlike"
+		"trait_ruler_warlike_2"
+		"leader_trait_fleet_organizer"
+		"leader_trait_fleet_organizer_2"
+		"trait_ruler_fortifier"
+		"trait_ruler_fortifier_2"
+		"trait_ruler_fortifier_3"
+		"xte_leader_trait_domineering"
+		"xte_leader_trait_indulgent"
+		"xte_leader_trait_spineless"
+		"xte_leader_trait_hateful"
+		"xte_leader_trait_warmonger"
+		"xte_leader_trait_superstitious"
+		"xte_leader_trait_cynical"
+	}
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		country_alloys_produces_mult = -0.1
+		country_naval_cap_mult = -0.15
+		pop_ethic_militarist_attraction_mult = 0.5
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_peacemonger|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_warmonger = {
+	inline_script = {
+		script = trait/icon_negative_no_tiers
+		ICON = GFX_xte_leader_trait_warmonger
+		COUNCIL = yes
+	}
+	cost = 1
+	leader_trait_type = negative
+	opposites = {
+		"trait_ruler_investor"
+		"trait_ruler_investor_2"
+		"trait_ruler_investor_3"
+		"xte_leader_trait_domineering"
+		"xte_leader_trait_indulgent"
+		"xte_leader_trait_spineless"
+		"xte_leader_trait_hateful"
+		"xte_leader_trait_peacemonger"
+		"xte_leader_trait_superstitious"
+		"xte_leader_trait_cynical"
+	}
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		country_consumer_goods_produces_mult = -0.1
+		country_border_friction_mult = 1
+		pop_ethic_pacifist_attraction_mult = 0.5
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_warmonger|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_superstitious = {
+	inline_script = {
+		script = trait/icon_negative_no_tiers
+		ICON = GFX_xte_leader_trait_superstitious
+		COUNCIL = yes
+	}
+	cost = 1
+	leader_trait_type = negative
+	opposites = {
+		"xte_leader_trait_domineering"
+		"xte_leader_trait_indulgent"
+		"xte_leader_trait_spineless"
+		"xte_leader_trait_hateful"
+		"xte_leader_trait_peacemonger"
+		"xte_leader_trait_warmonger"
+		"xte_leader_trait_cynical"
+	}
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		all_technology_research_speed = -0.05
+		ship_archaeological_site_excavation_speed_mult = -0.5
+		pop_ethic_materialist_attraction_mult = 0.5
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_superstitious|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_cynical = {
+	inline_script = {
+		script = trait/icon_negative_no_tiers
+		ICON = GFX_xte_leader_trait_cynical
+		COUNCIL = yes
+	}
+	cost = 1
+	leader_trait_type = negative
+	opposites = {
+		"trait_ruler_fertility_preacher"
+		"trait_ruler_fertility_preacher_2"
+		"xte_leader_trait_domineering"
+		"xte_leader_trait_indulgent"
+		"xte_leader_trait_spineless"
+		"xte_leader_trait_hateful"
+		"xte_leader_trait_peacemonger"
+		"xte_leader_trait_warmonger"
+		"xte_leader_trait_superstitious"
+	}
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		country_unity_produces_mult = -0.15
+		pop_ethic_spiritualist_attraction_mult = 0.5
+		multiplier = value:xte_anti_stacking_value|LEADER_TRAIT|xte_leader_trait_cynical|
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = { always = no }
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_extravagant_1 = {
+	inline_script = {
+		script = trait/icon_negative
+		ICON = GFX_xte_leader_trait_extravagant
+		COUNCIL = yes
+		TIER = none
+	}
+	cost = 1
+	leader_trait_type = negative
+	opposites = {
+		"trait_ruler_investor"
+		"trait_ruler_investor_2"
+		"trait_ruler_investor_3"
+		#"xte_leader_trait_extravagant_4"
+		#"xte_leader_trait_extravagant_2"
+		#"xte_leader_trait_extravagant_3"
+	}
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		country_trade_produces_mult = -0.1				#Ever Universe: Replaced defunct modifiers (4.0)
+		pop_happiness = -0.1
+		multiplier = value:xte_anti_stacking_extravagant_value
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = {
+		species = { has_trait = xte_trait_hedonistic }
+	}
+	requires_traits = {
+		xte_trait_hedonistic
+	}
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_extravagant_2 = {
+	inline_script = {
+		script = trait/icon_negative
+		ICON = GFX_xte_leader_trait_extravagant
+		COUNCIL = yes
+		TIER = 1
+	}
+	cost = 1
+	leader_trait_type = negative
+	opposites = {
+		"trait_ruler_investor"
+		"trait_ruler_investor_2"
+		"trait_ruler_investor_3"
+		#"xte_leader_trait_extravagant_1"
+		#"xte_leader_trait_extravagant_4"
+		#"xte_leader_trait_extravagant_3"
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		country_trade_produces_mult = -0.15				#Ever Universe: Replaced defunct modifiers (4.0)
+		pop_happiness = -0.15
+		leaders_unity_upkeep_mult = 0.05
+		multiplier = value:xte_anti_stacking_extravagant_value
+	}
+	leader_potential_add = {
+		species = { has_trait = xte_trait_hedonistic }
+	}
+	requires_traits = {
+		xte_trait_hedonistic
+	}
+	replace_traits = {
+		xte_leader_trait_extravagant_1
+	}
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_extravagant_3 = {
+	inline_script = {
+		script = trait/icon_negative
+		ICON = GFX_xte_leader_trait_extravagant
+		COUNCIL = yes
+		TIER = 2
+	}
+	cost = 1
+	leader_trait_type = negative
+	opposites = {
+		"trait_ruler_investor"
+		"trait_ruler_investor_2"
+		"trait_ruler_investor_3"
+		#"xte_leader_trait_extravagant_1"
+		#"xte_leader_trait_extravagant_2"
+		#"xte_leader_trait_extravagant_4"
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		country_trade_produces_mult = -0.2				#Ever Universe: Replaced defunct modifiers (4.0)
+		pop_happiness = -0.2
+		leaders_unity_upkeep_mult = 0.1
+		multiplier = value:xte_anti_stacking_extravagant_value
+	}
+	leader_potential_add = {
+		species = { has_trait = xte_trait_hedonistic }
+	}
+	requires_traits = {
+		xte_trait_hedonistic
+	}
+	replace_traits = {
+		xte_leader_trait_extravagant_2
+	}
+	leader_class = { commander scientist official }
+}
+
+xte_leader_trait_extravagant_4 = {
+	inline_script = {
+		script = trait/icon_negative
+		ICON = GFX_xte_leader_trait_extravagant
+		COUNCIL = yes
+		TIER = 3
+	}
+	cost = 1
+	leader_trait_type = negative
+	opposites = {
+		"trait_ruler_investor"
+		"trait_ruler_investor_2"
+		"trait_ruler_investor_3"
+		#"xte_leader_trait_extravagant_1"
+		#"xte_leader_trait_extravagant_2"
+		#"xte_leader_trait_extravagant_3"
+	}
+	custom_tooltip_with_modifiers = xte_councilor_trait_efficiency_notification
+	leader_potential_add = {
+		species = { has_trait = xte_trait_hedonistic }
+	}
+	triggered_councilor_modifier = {
+		potential = {
+			always = yes
+		}
+		country_trade_produces_mult = -0.25				#Ever Universe: Replaced defunct modifiers (4.0)
+		pop_happiness = -0.25
+		leaders_unity_upkeep_mult = 0.15
+		multiplier = value:xte_anti_stacking_extravagant_value
+	}
+	requires_traits = {
+		xte_trait_hedonistic
+	}
+	replace_traits = {
+		xte_leader_trait_extravagant_3
+	}
+	leader_class = { commander scientist official }
+}

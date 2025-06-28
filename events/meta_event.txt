@@ -1,5 +1,5 @@
 namespace = meta
-
+@meta_base_max_modifier = 0.85
 
 country_event = {
 	id = meta.1
@@ -20,205 +20,6 @@ country_event = {
 		set_global_flag = host_set_lyra
 		every_playable_country = {
 			country_event = { id = esc_events.5000 days = 0 }
-		}
-	}
-}
-
-country_event = {
-	id = meta.2
-	is_triggered_only = yes
-	hide_window = yes
-
-	trigger = {
-		not = {
-			has_country_flag = host_set_lyra
-		}
-		or = {
-			has_ascension_perk = ap_the_flesh_is_weak
-			has_ascension_perk = ap_synthetic_evolution
-		}
-	}
-
-	immediate = {
-		founder_species = {
-			save_global_event_target_as = founder_species_@owner
-		}
-		if = {
-			limit = {
-				event_target:host_set_lyra = {
-					any_owned_species = {
-						prevprev = {
-							any_owned_species = {
-								is_same_species = prevprev
-							}
-						}
-					}
-				}
-			}
-			if = {
-				limit = {
-					has_ascension_perk = ap_synthetic_evolution
-					
-				}
-				#has checks for already existing species
-				owner_main_species = {
-					create_species = {
-						is_mod = yes
-						name = this
-						plural = this
-						class = "ROBOT"
-						portrait = "default_robot"
-						traits = {
-							trait = trait_mechanical
-						}
-						can_be_modified = this
-						homeworld = this
-						namelist = this
-						gender = this
-		
-						effect = {
-							set_synth_origin_traits_effect = yes
-							set_synth_or_robot_portrait_effect = yes
-							save_global_event_target_as = synthspecies@root.owner
-							save_event_target_as = target_species
-							owner = { change_dominant_species = { species = event_target:target_species } }
-						}
-					}
-				}
-			}
-			if = {
-				limit = {
-					owner = {
-						owner_main_species = {
-							not = {
-								has_trait = trait_cybernetic
-							}
-						}
-					}
-				}
-				owner_main_species = {
-					modify_species = {
-						remove_trait = trait_latent_psionic
-						remove_trait = trait_psionic
-						effect = {
-							create_species = {
-								is_mod = yes
-								name = this
-								plural = this
-								class = this
-								portrait = this
-								traits = this
-								can_be_modified = this
-								homeworld = this
-								namelist = this
-								gender = this
-								traits = {
-									ideal_planet_class = this
-									trait = trait_cybernetic
-								}
-								effect = {
-									save_event_target_as = target_species
-									owner = { change_dominant_species = { species = event_target:target_species } }
-								}
-							}
-							last_created_species = {
-								save_global_event_target_as = cyberspecies@prev
-							}
-						}
-					}
-				}
-			}
-			random_owned_pop = {
-				limit = {
-					not = {
-						pop_has_trait = trait_mechanical
-					}
-					
-				}
-				species = {
-					save_global_event_target_as = target_species
-				}
-			}
-			random_owned_species = {
-				limit = {
-					any_species_pop = {
-						pop_has_trait = trait_mechanical
-					}
-				}
-				save_global_event_target_as = target_species
-
-			}
-			owner = { change_dominant_species = { species = event_target:target_species } }
-			event_target:host_set_lyra = {
-				every_owned_species = {
-					prevprev = {
-						every_owned_species = {
-							limit = {
-								is_same_species = prevprev
-							}
-							save_event_target_as = assimilation
-							owner = {
-								every_planet_within_border = {
-									if = {
-										limit = {
-											owner = {
-												has_ascension_perk = ap_synthetic_evolution
-											}
-										}
-										while = {
-											count = trigger:num_pops
-											random_owned_pop = {
-												limit = {
-													not = {
-														has_trait = trait_mechanical
-													}
-													species = {
-														is_same_species = event_target:assimilation
-													}
-												}
-												kill_pop = yes
-												planet = {
-													create_pop = {
-														species = event_target:synthspecies@root.owner
-														ethos = owner
-													}
-												}
-											}
-										}
-									}
-									else_if = {
-										limit = {
-											owner = {
-												has_ascension_perk = ap_the_flesh_is_weak
-											}
-										}
-										while = {
-											count = trigger:num_pops
-											random_owned_pop = {
-												limit = {
-													not = {
-														has_trait = trait_cybernetic
-													}
-													species = {
-														is_same_species = event_target:assimilation
-													}
-												}
-												kill_pop = yes
-												planet = {
-													create_pop = {
-														species = owner_main_species
-														ethos = owner
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
 		}
 	}
 }
@@ -244,7 +45,7 @@ country_event = {
 		export_modifier_to_variable = { modifier = empire_size_pops_mult variable = meta_empire_size_pops_mult_var }
 		change_variable = {
 			which = meta_empire_size_pops_mult_var
-			value = 0.85
+			value = @meta_base_max_modifier
 		}
 		if = {
 			limit = {
@@ -256,7 +57,7 @@ country_event = {
 		export_modifier_to_variable = { modifier = starbases_upkeep_mult variable = meta_starbases_upkeep_mult_var }
 		change_variable = {
 			which = meta_starbases_upkeep_mult_var
-			value = 0.75
+			value = @meta_base_max_modifier
 		}
 		if = {
 			limit = {
@@ -265,6 +66,7 @@ country_event = {
 			add_modifier = { modifier = meta_starbases_upkeep_mult mult = meta_starbases_upkeep_mult_var days = 29 }
 		}
 		export_modifier_to_variable = { modifier = country_megastructure_build_cap_add variable = meta_mega_build_cap }
+		# incase a mod adds this modifier
 		if = {
 			limit = {
 				check_modifier_value = { modifier = country_megastructure_build_cap_mult value > 0 }

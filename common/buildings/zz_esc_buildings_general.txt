@@ -1,0 +1,85 @@
+############################################################
+###                ESC buildings : general               ###
+############################################################
+
+# - Central Besearch Bureau			: mid-game superlab, provides scientist jobs and boosts local science production as well as empire's research speed
+
+
+############################################################
+###                Central Research Bureau               ###
+############################################################
+
+esc_building_central_research_bureau = {
+	base_buildtime = 540
+	category = research
+	icon = esc_building_centralresearchbureau
+	empire_limit = { base = 1 }
+
+	building_sets = {
+		research
+		government
+		urban
+	}
+
+	potential = {
+		NOT = { has_modifier = resort_colony }
+		NOT = { has_modifier = slave_colony }
+		NOT = { has_global_flag = ESC_GLOBAL_FLAG_central_research_bureau_forbidden }
+	}
+
+	allow = {
+		has_major_upgraded_capital = yes
+	}
+
+	# resources cost / upkeep / production
+	inline_script = {
+		script = buildings/esc_human_player_variable_cost_3
+		BASE_COST_MINERALS = 750
+		HUMAN_PLAYER_INFLUENCE_COST = 15
+		HUMAN_PLAYER_RARE_RESOURCE_COST_TYPE_1 = exotic_gases
+		HUMAN_PLAYER_RARE_RESOURCE_COST_1 = 25
+		HUMAN_PLAYER_RARE_RESOURCE_COST_TYPE_2 = volatile_motes
+		HUMAN_PLAYER_RARE_RESOURCE_COST_2 = 25
+		HUMAN_PLAYER_RARE_RESOURCE_COST_TYPE_3 = rare_crystals
+		HUMAN_PLAYER_RARE_RESOURCE_COST_3 = 25
+		BASE_UPKEEP_ENERGY = 10
+		HUMAN_PLAYER_RARE_RESOURCE_UPKEEP_TYPE_1 = exotic_gases
+		HUMAN_PLAYER_RARE_RESOURCE_UPKEEP_1 = 1
+		HUMAN_PLAYER_RARE_RESOURCE_UPKEEP_TYPE_2 = volatile_motes
+		HUMAN_PLAYER_RARE_RESOURCE_UPKEEP_2 = 1
+		HUMAN_PLAYER_RARE_RESOURCE_UPKEEP_TYPE_3 = rare_crystals
+		HUMAN_PLAYER_RARE_RESOURCE_UPKEEP_3 = 1
+		PRODUCED_RESOURCE = influence
+		RESOURCE_PRODUCTION = 0.25
+	}
+
+	planet_modifier = {
+		planet_physicists_physics_research_produces_add = 1
+		planet_biologists_society_research_produces_add = 1
+		planet_engineers_engineering_research_produces_add = 1
+		planet_physicists_consumer_goods_upkeep_add = 1
+		planet_biologists_consumer_goods_upkeep_add = 1
+		planet_engineers_consumer_goods_upkeep_add = 1
+	}
+
+	country_modifier = {
+		all_technology_research_speed = 0.05
+		num_tech_alternatives_add = 1
+	}
+
+	# jobs
+	inline_script = {
+		script = jobs/researchers_add
+		AMOUNT = @building_static_jobs_very_high_3
+		LARGE_AMOUNT = @building_static_jobs
+	}
+	# inline_script = {
+	# 	script = jobs/esc_multitype_researcher_add
+	# 	RESEARCHER_AMOUNT = @ESC_job_count_4
+	# 	HEAD_RESEARCHER_AMOUNT = @ESC_job_count_1
+	# 	GESTALT_RESEARCHER_AMOUNT = @ESC_job_count_7
+	# }
+
+	show_tech_unlock_if = { NOT = { has_global_flag = ESC_GLOBAL_FLAG_central_research_bureau_forbidden } }
+	prerequisites = { "esc_tech_grand_research_initiative" }
+}
